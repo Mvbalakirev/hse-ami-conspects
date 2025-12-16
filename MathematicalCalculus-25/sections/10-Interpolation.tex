@@ -1,0 +1,155 @@
+\section{Интерполяция}
+
+\subsection{Интерполяционный многочлен Лагранжа}
+
+\begin{gather*}
+    Q_k (x) =
+        \frac{ (x - x_1) \ldots (x - x_{k - 1}) (x - x_{k + 1}) \ldots (x - x_n) }
+        {(x_k - x_1) \ldots (x_k - x_{k - 1}) (x_k - x_{k + 1}) \ldots (x_k - x_n)}
+    \\
+    P_n(x) = \sum\limits_{k = 1}^{n} f(x_k) Q_k (x)
+\end{gather*}
+
+\begin{example}{}{}
+    \begin{gather*}
+        f(x) = \sin \pi x
+        \\
+        x_1 = 0, x_2 = \frac{1}{6}, x_3 = \frac{1}{2}
+        \\
+        P_3(x)
+            = \frac{ \left( x - \frac{1}{2} \right) \left( x - \frac{1}{6} \right) }{ -\frac{1}{2} \cdot \left( -\frac{1}{6} \right) } \cdot 0
+            + \frac{x \left( x - \frac{1}{2} \right) }{ \left( \frac{1}{6} - 0 \right) \left( \frac{1}{6} - \frac{1}{2} \right)} \cdot \frac{1}{2}
+            + \frac{x \left( x - \frac{1}{6} \right) }{ \left( \frac{1}{2} - 0 \right) \left( \frac{1}{2} - \frac{1}{6} \right)} \cdot 1
+        \\
+        P_3(x) = (?) -3x^2 + \frac{7}{2}x
+    \end{gather*}
+\end{example}
+
+\subsection{Интерполяционный многочлен Ньютона}
+
+\begin{gather*}
+    P_n(x) = P_1(x) + \sum\limits_{k = 2}^n P_k(x) - P_{k - 1}(x)
+    \\
+    P_k(x) - P_{k - 1}(x) = A_k (x - x_1) \ldots (x - x_{k - 1})
+    \\
+    A_k =
+        = \frac{f(x_1)}{(x_1 - x_2) \cdots (x_1 - x_k)}
+        + \frac{f(x_2)}{(x_2 - x_1) (x_2 - x_3) \cdots (x_1 - x_k)}
+        + \\
+        + \ldots
+        + \frac{f(x_k)}{(x_k - x_1) \cdots (x_k - x_{k - 1})}
+    \\
+    A_k = f_k (x_1, x_2, \ldots, x_k) - \text{разделенная разность}
+\end{gather*}
+
+\begin{defn}{}{}
+    \begin{gather*}
+        P_n(x)
+            = f_1(x_1) + f_2(x_1, x_2) (x_2 - x_1) + \ldots
+            + \\
+            + f_n (x_1, \ldots, x_n) (x_n - x_1) \ldots (x_n - x_{n - 1})
+            = N_n(x)
+    \end{gather*}
+
+    \( N_n(x) \) --- интерполяционный многочлен Ньютона
+\end{defn}
+
+В точке \( x_n \) верно \( f(x_n) = P(x_n) \)
+\[
+    f(x_n)
+    =
+    f(x_1)
+    +
+    (x_n - x_1) \cdot f_2 (x_1, x_2)
+    +
+    \ldots
+    +
+    (x_n - x_1) \cdot \ldots \cdot (x_n - x_{n - 1}) \cdot f_n(x_1, \ldots, x_n)
+\]
+
+\( x_n \) --- любое число, давайте заменим на \( x \):
+\[
+    f(x)
+    =
+    f(x_1)
+    +
+    (x - x_1) \cdot f_2 (x_1, x_2)
+    +
+    \ldots
+    +
+    (x - x_1) \cdot \ldots \cdot (x - x_{n - 1}) \cdot f_n(x_1, \ldots, x_{n - 1}, x)
+\]
+
+Теперь выпишем то же самое для \( x_1, x_2, \ldots, x_{n - 2}, x \):
+\[
+    f(x)
+    =
+    f(x_1)
+    +
+    (x - x_1) \cdot f_2 (x_1, x_2)
+    +
+    \ldots
+    +
+    (x - x_1) \cdot \ldots \cdot (x - x_{n - 2}) \cdot f_{n - 1}(x_1, \ldots, x_{n - 2}, x)
+\]
+
+Вычтем из первого равенства второе:
+\begin{gather*}
+    0
+    =
+    (x - x_1) \cdot \ldots \cdot (x - x_{n - 1}) \cdot f_n(x_1, \ldots, x_{n - 1}, x)
+    +
+    \\
+    +
+    (x - x_1) \cdot \ldots \cdot (x - x_{n - 2}) \cdot f_{n - 1}(x_1, \ldots, x_{n - 1})
+    -
+    \\
+    -
+    (x - x_1) \cdot \ldots \cdot (x - x_{n - 2}) \cdot f_{n - 1}(x_1, \ldots, x_{n - 2}, x)
+\end{gather*}
+
+Разделив обе части на \( (x - x_1) \cdot \ldots \cdot (x - x_{n - 1}) \), получим:
+\[
+    f(x_1, \ldots, x_n) = \frac{f_{n - 1}(x_1, \ldots, x_{n - 2}, x) - f_{n - 1}(x_1, \ldots, x_{n - 2}, x_{n - 1})}{x - x_{n - 1}}
+\]
+
+Таким образом с помощью реккурентных соотношений научились вычислять разделенные разности.
+
+\begin{thrm}{}{}
+    Пусть \( f \in C[a, b], f \in D^n (a, b) \),
+    \( x_1, \ldots, x_n \in (a, b) \), \( x_1 < x_2 < \ldots < x_n \) \newline
+
+    Тогда \( \exists c \in (a, b) : f(b) - P_n(b) = \frac{f^{(n)}(c)}{n!} \cdot \prod\limits_{k = 1}^{n} (b - x_k) \)
+\end{thrm}
+
+Доказательство:
+
+\( R_n(x) = f(x) - P_n(x) - B \prod\limits_{k = 1}^{n} (x - x_k) \),
+хотим \( B = \frac{f^{(n)}(c)}{n!} \).
+
+\( R_n (x_k) = 0, k = 1, \ldots, n \). Пусть еще \( R_n(b) = 0 \)
+
+По теореме Ролля \( \exists c_1' \in (x_1, x_2), \ldots, c_n' \in (x_n, b) : R_n' (c_k') = 0, k = 1, \ldots, n \)
+
+Вновь по теореме Ролля \( \exists c_1'', c_{n - 1}'' \in (a, b) : R_n'' (c_k''), k = 1, \ldots, n - 1 \)
+
+Продолжаем так, получим \( c : R_n^{(n)} (c) = 0 \)
+
+То есть \( f^{(n)} (c) - n! B = 0 \Leftrightarrow B = \frac{f^{(n)}(c)}{n!} \)
+
+\newpage
+
+Если взять не \( b \), а \( x_0 \in (a, b) \), \( x_0 \neq x_k \),
+то \( f(x_0) - P_n(x_0) = \frac{f^{(n)}(c_0)}{n!} \cdot \prod\limits_{k = 1}^{n} (x_0 - x_k) \)
+
+\begin{example}{}{}
+    \begin{gather*}
+        \left| f(x_0) - \left( -3x_0^2 + \frac{7}{2} \right) \right|
+            = \left| \frac{\sin''' c_0}{6} (x_0 - 0) \left( x_0 - \frac{1}{2} \right) \left( x_0 - \frac{1}{6} \right) \right|
+            \leq \\
+            \leq \left| \frac{1}{6} (x_0 - 0) \left( x_0 - \frac{1}{2} \right) \left( x_0 - \frac{1}{6} \right) \right|
+            = \frac{1}{6} g(x_0)
+    \end{gather*}
+
+    Проверьте, что \( \max\limits_{\left[ 0, \frac{1}{2} \right]} g(x_0) = 0.1 \)
+\end{example}

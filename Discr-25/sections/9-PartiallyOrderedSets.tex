@@ -1,0 +1,490 @@
+\section{Частично упорядоченные множества}
+
+\subsection{Отношения частичного порядка}
+
+\begin{defn}{Отношение строгого частичного порядка}{}
+    Отношение \( R \) на \( A \) называется отношением строгого порядка, если:
+    \begin{enumerate}
+        \item
+            \( \lnot \ a \ R \ a \) (иррефлексивность)
+        \item
+            \( a \ R \ b \ \land \ b \ R \ c \Rightarrow a \ R \ c \) (транзитивность)
+    \end{enumerate}
+
+    \( R \: = \: < \)
+\end{defn}
+
+\begin{defn}{Отношение нестрогого частичного порядка}{}
+    Отношение \( R \) на \( A \) называется отношением нестрогого порядка, если:
+    \begin{enumerate}
+        \item
+            \( a \ R \ a \) (рефлексивность)
+        \item
+            \( a \ R \ b \ \land b \ R \ a \Rightarrow a = b \) (антисимметричность)
+        \item
+            \( a \ R \ b \ \land \ b \ R \ c \Rightarrow a \ R \ c \) (транзитивность)
+    \end{enumerate}
+
+    \( R \: = \: \leq \)
+\end{defn}
+
+\begin{lemma}{О связи строгого и нестрогого порядков}{}
+    \begin{itemize}
+        \item
+            \( \leq \) --- нестрогий порядок на \( A \)
+            \( \Rightarrow \: < \: = \: \leq \: \setminus \{ (a, a) \ \vline \ a \in A \} \)
+            - отношение строгого порядка на \( A \)
+        \item
+            \( < \) --- строгий порядок на \( A \)
+            \( \Rightarrow \: \leq \: = \: < \: \cap \{ (a, a) \ \vline \ a \in A \} \)
+            - отношение строгого порядка на \( A \)
+    \end{itemize}
+\end{lemma}
+
+Доказательство:
+\begin{itemize}
+    \item
+        \begin{enumerate}
+            \item
+                \( \lnot \ a \ R \ a \) --- очевидно.
+            \item
+                \( a \ R \ b \ \land b \ R \ c \Rightarrow a \neq b, b \neq c, a \leq b, b \leq c \Rightarrow a \leq c\)
+
+                Если \( a = c \), то \( a \leq b, b \leq a \Rightarrow a = b \) --- противоречие.
+        \end{enumerate}
+    \item
+        \begin{enumerate}
+            \item
+                \( \ a \ R \ a \) --- очевидно.
+            \item
+                Пусть \( a \leq b \land b \leq a \)
+
+                Допустим, что \( a \neq b \).
+                Тогда \( a < b \land b < a \), получили противоречие иррефлексивности.
+            \item
+                \( a \leq b \land b \leq c \)
+
+                Если \( a = b \) или \( b = c \), то очевидно.
+
+                Иначе \( a < b \land b < c \Rightarrow a < c \Rightarrow a \leq c \)
+        \end{enumerate}
+\end{itemize}
+
+\subsection{Частично упорядоченные множества}
+
+\begin{defn}{Частично упорядоченное множество}{}
+    Множество \( A \neq \varnothing \) с заданным на нем отношением
+    частичного порядка называется частично упорядоченным множеством.
+
+    \( (A, <), (A, \leq) \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( (\NN, \leq) \)
+        \item
+            \( (\NN, |) \) (отношение делимости)
+        \item
+            \( (\ZZ \setminus \{ 0 \}, |) \) --- не ЧУМ (\( (-1) | 1, 1 | (-1) \), но \( -1 \neq 1 \))
+        \item
+            \( (2^A, \subseteq) \)
+        \item
+            \( (\BB^n, \leq) \)
+    \end{enumerate}
+\end{example}
+
+\subsection{Операции над порядками}
+\begin{enumerate}
+    \item
+        Покоординатный порядок \( (P \times Q, \leq) \):
+
+        \(
+            (p_1, q_1) \leq (p_2, q_)
+            \Leftrightarrow
+            \begin{cases}
+                p_1 \leq_P p_2
+                \\
+                q_1 \leq_Q q_2
+            \end{cases}
+        \)
+    \item
+        Лексикографический порядок \( (P \times Q, \leq) \):
+
+        \(
+            (p_1, q_1) \leq (p_2, q_)
+            \Leftrightarrow
+            p_1 < p_2 \lor (p_1 = p_2 \land q_1 \leq q_2
+        \)
+    \item
+        Считаем, что \( P \cap Q = \varnothing \)
+
+        \( P + Q = (P \sqcap Q, \leq): \)
+
+        \( x \leq y
+            \Leftrightarrow
+            \left[
+                \begin{aligned}
+                    & x \leq_P y
+                    \\
+                    & x \leq_Q y
+                    \\
+                    & x \in P, y \in Q
+                \end{aligned}
+            \right.
+        \)
+\end{enumerate}
+
+\begin{defn}{Изоморфизм}{}
+    Пусть \( (P, \leq_P), (Q, \leq_Q) \).
+
+    Тогда говорят, что они изоморфны, если существует биекция \( \varphi : P \to Q \) такая,
+    что \( \forall x, y \in P \ x \leq_P y \Leftrightarrow \varphi(x) \leq_Q \varphi(y) \).
+
+    Обозначается \( (P, \leq_P) \cong (Q, \leq_Q) \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( (\NN, \leq) \cong (\NN \cup \{ 0 \}) \ \varphi(n) = n - 1 \)
+        \item
+            \( (\QQ, \leq) \not\cong (\RR, \leq) \), так как нет биекции.
+        \item
+            \( ([0, 1], \leq) \not\cong ((0, 1), \leq) \), так как нет наименьшего и наибольшего элементов.
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{}{}
+    \( a \in P \) --- минимальный, если \( \not\exists b \in P : b < a \)
+
+    \( a \in P \) --- наименьший, если \( \forall b \in P \ a \leq b \)
+
+    \( a \in P \) --- максимальный, если \( \not\exists b \in P : b > a \)
+
+    \( a \in P \) --- наибольший, если \( \forall b \in P \ a \geq b \)
+\end{defn}
+
+\begin{example}{}{}
+    \( (Z, \leq) \not\cong (Q, \leq) \)
+\end{example}
+
+\begin{defn}{Плотный порядок}{}
+    \( \forall a < b \ \exists c : a < c \land c < b \)
+\end{defn}
+
+\( (Q, \leq) \) --- плотный порядок, а \( (Z, \leq) \) --- нет.
+
+\begin{defn}{Отрезок}{}
+    Для \( a \leq b \) \( [a, b] = \{ c \in P \ \vline \ a \leq c \land c \leq b \} \)
+\end{defn}
+
+Если \( \varphi: P \to Q \) --- изоморфизм порядков, то \( \phi([a, b]) = [\phi(a), \phi(b)] \).
+Доказательство тривиально.
+
+\newpage
+
+\subsection{Фундированные подмножества}
+
+\begin{defn}{Фундированное множество}{}
+    ЧУМ \( (P, \leq) \) называется фундированным, если \( \forall X \subseteq P, x \neq \varnothing \)
+    имеет минимальный элемент.
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( (N, \leq) \) --- фундированное
+        \item
+            \( (Z, \leq) \) --- не фундированное, возьмем \( X = \ZZ \)
+    \end{itemize}
+\end{example}
+
+\begin{thrm}{}{}
+    Для ЧУМ-а \( (P, \leq) \) эквивалентны следующие условия:
+    \begin{enumerate}
+        \item
+            \( \forall X \subseteq P, x \neq \varnothing \Rightarrow X \) имеет минимальный элемент.
+        \item
+            \( \not\exists \) бесконечно убывающей цепи \( p_1 > p_2 > p_3 > \ldots \)
+        \item
+            Для \( P \) справедлив принцип индукции:
+
+            \(
+                \forall p \in P ( ( \forall q < p \ A(q) - \text{ист} ) \Rightarrow A(p) - \text{ист} )
+                \Rightarrow
+                \forall p \in P A(p) - \text{ист}
+            \)
+    \end{enumerate}
+\end{thrm}
+
+Доказательство:
+\begin{enumerate}
+    \item
+        \( 1 \Rightarrow 2 \)
+
+        Докажем от противного: есть бесконечная цепь \( \Rightarrow \) нет минимального
+    \item
+        \( 2 \Rightarrow 1 \)
+
+        Вновь докажем от противного.
+        Построим бесконечную цепь:  в \( X \subseteq P \) нет минимального,
+        значит всегда можем найти новый элемент для цепи.
+    \item
+        \( 1 \Rightarrow 3 \)
+
+        Пусть \( X = \{ p \in P \ \vline \ A(p) - \text{ложно} \} \neq \varnothing \).
+
+        Рассмотрим \( p' \) --- минимальный элемент в \( X \).
+
+        Но тогда \( \forall q < p' \) \( A(q) \) --- ист.
+        Значит \( A(p') \) --- ист \( \Rightarrow \) противоречие \( \Rightarrow X = \varnothing \).
+    \item
+        \( 3 \Rightarrow 1 \)
+
+        Пусть \( X \subseteq P, X \neq \varnothing \), и \( A(p) = p \notin x \)
+
+        Допустим, что \( X \) не имеет минимальных элементов.
+
+        \( \forall p \in P ( ( \forall q < p \ q \notin x) \Rightarrow p \notin X ) \) --- верно,
+        так как иначе \( p \) --- минимальный элемент.
+
+        Но тогда \( \forall p \ p \notin X \Rightarrow X = \varnothing \) --- противоречие.
+
+        Значит у \( \forall X \subseteq P \) есть минимальный элемент.
+\end{enumerate}
+
+\subsection{Что-то про изоморфизмы}
+
+\begin{thrm}{}{}
+    Пусть \( (P, \leq_P), \ (Q, \leq_Q) \) --- счетные плотные линейные порядки без наименьшего и наибольшего элементов.
+
+    Тогда \( (P, \leq_P) \cong (Q, \leq_Q) \)
+\end{thrm}
+
+Доказательство:
+\begin{gather*}
+    P = \{ p_1, p_2, p_3, \ldots \}
+    \\
+    Q = \{ q_1, q_2, q_3, \ldots \}
+\end{gather*}
+
+Строим изоморфизм \( \varphi : P \to Q \)
+
+Возьмем наименьший невзятый элемент из \( P \), пусть это \( p \).
+
+Пусть отсортированные уже взятые \( p_i \) --- \( a_1, \ldots, a_k \),
+а \( q_i \) --- \( b_1, \ldots, b_k \).
+
+Он расположен между какими-то двумя уже взятыми \( a_i \leq q \leq a_{i + 1} \) (или перед \( a_0 \) / после \( a_{k - 1} \))
+
+Но засчет плотности и отсутствия наибольшего (и наименьшего элемента) у нас найдется элемент из \( Q \),
+который находится между \( b_i \) и \( b_{i + 1} \).
+
+Давайте продолжать выбирать так пары элементов, поочередно беря то минимальный по номеру невзятый \( p_i \), то \( q_i \).
+
+\subsection{Цепи и антицепи}
+
+Пусть \( (P, \leq) \) --- ЧУМ
+
+\begin{defn}{}{}
+    Цепь в \( P \) --- это \( \varnothing \neq C \subseteq P : \forall x, y \in C \ x \leq y \lor y \leq x \)
+
+    Антицепь в \( P \) --- это \( \varnothing \neq A \subseteq P : \forall x \neq y \in A \) \( x, y \) не сравнимы
+\end{defn}
+
+\begin{exercise}{}{}
+    Если \( C \) --- цепь в \( P \), а \( A \) --- антицепь в \( P \), то \( | A \cap C | \leq 1 \)
+\end{exercise}
+
+\begin{exercise}{}{}
+    Пусть \( P \) --- конечный ЧУМ
+
+    Пусть множество разбивается на \( k \) цепей.
+
+    Тогда \( \max |A| \leq k \)
+
+    Пусть множество разбивается на \( l \) антицепей.
+
+    Тогда \( \max |C| \leq l \)
+\end{exercise}
+
+\begin{thrm}{Теорема Мирского}{}
+    Пусть \( P \) --- конечный ЧУМ
+
+    Пусть \( P \) можно разбить на \( l \) антицепей и нельзя разбить на меньшее число.
+
+    Тогда \( \max |C| = l \)
+\end{thrm}
+
+Учитывая упражнения выше, достаточно показать, что можно разбить множество на \( \max |C| = l \) антицепей.
+
+\( \min X =  \{ x \in X \ \vline \ x - \text{минимальный в} \ X \} \)
+
+\begin{gather*}
+    P_1 = \min P
+    \\
+    P_2 = \min ( P \setminus P_1)
+    \\
+    P_3 = \min ( P \setminus (P_1 \cup P_2) )
+    \\
+    \vdots
+    \\
+    P_k = \min ( P \setminus (P_1 \cup \ldots \cup P_{k - 1}) )
+    \\
+    \vdots
+\end{gather*}
+
+\( P_1, \ldots, P_m \) --- антицепи, причем не пересекаются.
+
+\( p_m \in P_m \Rightarrow \exists p_{m - 1} \in P_{m - 1} : p_m > p_{m - 1} \).
+
+Значит можем так достать цепь \( p_m > p_{m - 1} > \ldots > p_1 \).
+
+Отсюда \( m \leq \max |C| = l \leq m \Rightarrow l = m \), что и требовалось доказать.
+
+\begin{thrm}{Теорема Дилуорса}{}
+    Пусть \( P \) --- конечный ЧУМ
+
+    Пусть \( P \) можно разбить на \( k \) цепей и нельзя разбить на меньшее число.
+
+    Тогда \( \max |A| = k \)
+\end{thrm}
+
+Нужно доказать только \( \max |A| \geq k \), неравенство в обратную сторону было раньше в упражнении.
+
+Докажем по индукции по размеру множества:
+
+База: \( s = 1 \) --- очевидно.
+
+Переход: \( < s \to s \)
+
+Рассмотрим минимальный элемент \( m \in P \).
+
+Удалим его: \( P \setminus \{ m \} = P' \).
+Рассмотрим в полученном множестве \( \max\limits_{A \in P'} |A| = l \).
+Очевидно, что в изначальном множестве \( \max\limits_{A \in P} |A| = l \) или \( l + 1 \).
+
+\begin{itemize}
+    \item
+        Случай \( \max\limits_{A \in P} |A| = l + 1 \) очевиден, так как в новой антицепи точно содержится \( m \),
+        а значит его можно покрыть отдельной цепью из одного элемента.
+    \item
+        Теперь разберем случай \( \max\limits_{A \in P} |A| = l \).
+
+        Рассмотрим разбиение \( P' \) на цепи \( C_1, C_2, \ldots, C_l \).
+        \( p_i \) --- наименьший возможный элемент в \( C_i \), входящий в антицепь размера \( l \) в \( P' \).
+
+        Покажем, что \( \{ p_1, \ldots, p_l \} \) --- антицепь.
+
+        Предположим противное, путь \( p_i < p_j \).
+
+        Рассмотрим антицепь \( A \) размера \( l \), в которой находится \( p_i \).
+
+        \( A \cap C_j = \{ y \} \)
+
+        \( p_j \leq y \), так как \( p_j \) --- наименьший возможный в такой антицепи.
+
+        Но тогда \( p_i < p_j \leq y \) --- противоречие, так как \( p_i \) и \( y \) находятся в \( A \).
+
+        Размер антицепи не меняется при добавлении \( m \) \( \Rightarrow \) \( \exists j : \) \( p_j \) сравним с \( m \).
+
+        \( m \) --- минимальный, поэтому \( m < p_j \).
+
+        Давайте обрежем начало цепи \( C_j \) перед \( p_j \), заменим на \( m \), получим \( C = m \to p_j \to \ldots \).
+
+        Давайте выкинем эту цепь, получим новое множество.
+        Понятно, что в этом новом множестве размер антицепи не превышает \( l \),
+        так как есть разбиение на \( l \) цепей.
+
+        Но размер не может быть \( l \),
+        так как тогда бы в остатке (начале) цепи был элемент из антицепи, меньший \( p_j \).
+        Значит антицепи не превышает \( l - 1 \), значит есть разбиение \( P \setminus C \) на \( l - 1 \) цепь.
+        Вернем \( C \), получим разбиение \( P \) на \( l \) цепей.
+
+        Значит \( \max |A| \geq l \), что и требовалось доказать.
+\end{itemize}
+
+\subsection{Цепи и антицепи в булевом кубе}
+
+\( \BB^n = \{ 0, 1 \} \), \( \leq \) --- покоординатно, то есть
+\( (a_1, \ldots, a_n) \leq (b_1, \ldots, b_n) \Leftrightarrow \forall i \ a_i \leq b_i \)
+
+\begin{defn}{}{}
+    Вес набора \( \tilde{a} = (a_1, \ldots, a_n) \in \BB^n \) --- количество единиц в нем.
+
+    Обозначается \( |\tilde{a}| \)
+\end{defn}
+
+\begin{defn}{}{}
+    Уровни \( \BB^n \): \( B_0, B_1, \ldots, B_n \)
+
+    \( B_k = \{ \text{все наборы веса \( k \)} \} \)
+
+    Не трудно заметить, что \( |B_k| = C_{n}^{k} \)
+\end{defn}
+
+\begin{exercise}{}{}
+    Максимальная цепь в \( \BB^n \) имеет длину \( n + 1 \)
+\end{exercise}
+
+\begin{thrm}{Теорема Шпернера}{}
+    Максимальный размер антицепи в \( \BB^n \) --- \( C_{n}^{\left\lfloor \frac{n}{2} \right\rfloor} \)
+\end{thrm}
+
+\begin{lemma}{LYM-неравенство}{}
+    Lubell (1966), Yamamoto (1954), Meshalkin (1963)
+
+    Пусть \( A \) --- антицепь в \( \BB^n \).
+    Обозначим \( a_k = \left| A \cap B_k \right| \)
+
+    Тогда \( \sum\limits_{k = 0}^{n} \frac{a_k}{C_{n}^{k}} \leq 1 \)
+\end{lemma}
+
+Зададимся вопросами:
+\begin{enumerate}
+    \item
+        Сколько всего цепей размера \( n + 1 \) в \( \BB^n \)?
+
+        Ответ: \( n! \)
+    \item
+        Сколько есть цепей размера \( n + 1 \) в \( \BB^n \) проходят через \( \tilde{a} \)
+
+        Ответ: \( k! (n - k)! \)
+\end{enumerate}
+
+\begin{gather*}
+    n! \geq \sum\limits_{a \in A} |a|! \cdot (n - |a|)! = \sum\limits_{k = 0}^n k! (n - k)! a_k
+    \\
+    \Downarrow
+    \\
+    \sum\limits_{k = 0}^{n} \frac{a_k}{C_{n}^{k}} \leq 1
+\end{gather*}
+
+Вернемся к доказательству теоремы Шпернера:
+\begin{gather*}
+    \sum\limits_{k = 0}^{n} \frac{a_k}{C_{n}^{\left\lfloor \frac{n}{2} \right\rfloor}}
+        \leq \sum\limits_{k = 0}^{n} \frac{a_k}{C_{n}^{k}} \leq 1
+    \\
+    \Downarrow
+    \\
+    |A| = \sum\limits_{k = 0}^n a_k \leq C_{n}^{\left\lfloor \frac{n}{2} \right\rfloor}
+    \\
+\end{gather*}
+
+\subsection{Графы сравнимости}
+
+\begin{defn}{}{}
+    Пусть \( (P, \leq) \) --- конечный ЧУМ.
+    Его графом сравнимости называется граф \( G_P \): \( V = P, \ \{ x, y \} \in E \Leftrightarrow x < y \lor y < x \)
+
+    Граф сравнимости \( G \)
+\end{defn}
+
+\begin{defn}{}{}
+    \( G \) --- совершенный, если \( \forall \) индуцированного подграфа \( H \subseteq G \) \( \mathcal{X}(H) = \omega(H) \)
+\end{defn}
+
+\begin{defn}{}{}
+    Для \( \forall \) конечного ЧУМ-а \( P \) его граф сравнимости \( G_p \) и \( \overline{G_p} \) --- совершенные графы.
+\end{defn}
