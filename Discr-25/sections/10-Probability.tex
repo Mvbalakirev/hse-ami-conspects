@@ -93,7 +93,7 @@
         \end{itemize}
 
         \begin{gather*}
-            I_{\overline{A_1 \cup \ldots \cup A_n}} = I_{\overline{A_1} \cap \ldots \cap \overline{A_n}} = 
+            I_{\overline{A_1 \cup \ldots \cup A_n}} = I_{\overline{A_1} \cap \ldots \cap \overline{A_n}} =
                 I_{\overline{A_1}} \cdot \ldots \cdot I_{\overline{A_n}} = (1 - I_{A_1}) \ldots (1 - I_{A_n})
             \\
             \Downarrow
@@ -250,5 +250,251 @@
 \end{example}
 
 \begin{exercise}{}{}
-    Докажите, что при подбрасывании монетке события вида \( A_i = (\text{в \( i \)-м броске выпал орел}) \) независимы в совокупности. 
+    Докажите, что при подбрасывании монетке события вида \( A_i = (\text{в \( i \)-м броске выпал орел}) \) независимы в совокупности.
+\end{exercise}
+
+\subsection{Математическое ожидание}
+
+\( (\Omega, P) \) --- вероятностное пространство.
+
+\begin{defn}{}{}
+    Случайная величина --- это \( f : \Omega \to \RR \)
+\end{defn}
+
+\begin{defn}{}{}
+    Математическое ожидание \( f \) --- это \( E(f) = p_1 f(\omega_1) + \ldots + p_n f(\omega_n) = \sum\limits_{i = 1}^n p_i f(\omega_i) \)
+\end{defn}
+
+\begin{example}{}{}
+    Математическое ожидание выпавшего на игральном кубике числа:
+    \[
+        \frac{1}{6} \cdot (1 + 2 + 3 + 4 + 5 + 6) = \frac{21}{6} = 3.5
+    \]
+\end{example}
+
+Свойства математического ожидания:
+\begin{itemize}
+    \item
+        \( f = const = c \) --- константная случайная величина
+
+        \( E(f) = c \)
+
+        \newpage
+    \item
+        \( A \subseteq \Omega \) --- событие,
+        \(
+            I_A (\omega) = \begin{cases}
+                1, \: \omega \in A
+                \\
+                0, \: \omega \notin A
+            \end{cases}
+        \)
+
+        \( E(I_A) = P(A) \)
+    \item
+        \(
+            \displaystyle
+            E(f) = \sum\limits_{x \in range(f)} x \cdot P(f = x)
+        \)
+\end{itemize}
+
+\begin{lemma}{Линейность математического ожидания}{}
+    Пусть \( (\Omega, P) \) --- вероятность пространство, \( f, g \) --- случайные величины.
+
+    Тогда:
+    \begin{itemize}
+        \item
+            \( E(f + g) = E(f) + E(g) \)
+        \item
+            \( E(c \cdot f) = c \cdot E(f) \)
+    \end{itemize}
+\end{lemma}
+
+Доказательство тривиально (прямая проверка по формуле)
+
+\begin{example}{Задача о днях рождения}{}
+    Есть \( n = 28 \) людей, посчитать математическое ожидание числа пар людей,
+    у которых даты совпали.
+\end{example}
+
+Считаем, что \( \Omega = \{ 1, 2, \ldots, 365 \}^n \), все варианты равновероятны.
+
+Пусть \( f \) --- количество пар людей, родившихся в один день года.
+
+\begin{exercise}{}{}
+    Если \( \Omega \) не равновероятна, то \( E(f) \) может лишь увеличиться.
+\end{exercise}
+
+\( f = \sum\limits_{i < j} g_{ij} \), где
+\(
+    g_{ij} (\omega) = \begin{cases}
+        1, \text{\( i, j \) родились в один день}
+        \\
+        0, \text{иначе}
+    \end{cases}
+\)
+
+Понятно, что \( E(g_{ij}) = \frac{1}{365} \)
+
+Тогда математическое ожидание \( f \):
+\[
+    E(f) = E \left( \sum\limits_{i < j} g_{ij} \right)
+    =
+    \sum\limits_{i < j} E(g_{ij})
+    =
+    \frac{n \cdot (n - 1)}{2} \cdot \frac{1}{365}
+    =
+    \frac{28 \cdot 27}{2 \cdot 365} = \frac{378}{365} > 1
+\]
+
+\begin{thrm}{}{}
+    Пусть \( f : \Omega \to \RR_{\geq 0} \) --- неотрицательная случайная величина, \( \alpha > 0 \).
+
+    Тогда \( P(f \geq \alpha) \leq \frac{E(f)}{\alpha} \)
+\end{thrm}
+
+Пусть \( f(\omega_i) = a_i \)
+\[
+    E(f) = p_1 a_1 + p_2 a_2 + \ldots + p_n a_n
+\]
+
+Заменим все числа \( \geq \alpha \) на \( \alpha \), а все меньшие --- на \( 0 \).
+Тогда мы только уменьшим сумму, но в то же время получим оценку:
+\[
+    E(f) \geq P(f \geq \alpha) \cdot \alpha
+\]
+
+А именно это мы и хотели доказать.
+
+\begin{exercise}{}{}
+    Приведите контрпример в случае произвольной (то есть, не неотрицательной) случайной величины.
+\end{exercise}
+
+\begin{example}{}{}
+    Имеется вероятностный алгоритм \( I \)
+    \begin{itemize}
+        \item
+            Всегда работает правильно
+        \item
+            Иногда работает долго
+        \item
+            Среднее время работы \( T = O(n^2) \)
+    \end{itemize}
+
+    Хотим: алгоритм \( II \)
+    \begin{itemize}
+        \item
+            Всегда работает за \( O(n^2) \)
+        \item
+            Иногда работает неправильно (\( \leq 0.01\% \) случаев)
+    \end{itemize}
+\end{example}
+
+План: запустим алгоритм \( I \) \( 10000 \cdot T \) шагов,
+после чего обрываем алгоритм. Если мы успели получить ответ,
+то будем считать его результатом работы \( II \),
+иначе выдадим какой-нибудь мусор.
+
+Рассмотрим \( f \) --- время работы \( I \):
+\[
+    P(f \geq 10000T) \leq \frac{E(f)}{10000T} = \frac{T}{10000T} = \frac{1}{10000}
+\]
+
+\subsection{Дисперсия}
+
+\begin{defn}{}{}
+    Дисперсия случайную величие \( f : \Omega \to \RR \) --- это \( D(f) = E \left( (f - E(f))^2 \right) \)
+\end{defn}
+
+\begin{thrm}{}{}
+    \[
+        D(f) = E(f^2) - E(f)^2
+    \]
+\end{thrm}
+
+\begin{gather*}
+    D(f)
+    =
+    E \left( (f - E(f))^2 \right)
+    =
+    E ( f^2 - 2 f \cdot E(f) + (E(f))^2 )
+    =
+    \\
+    =
+    E(f^2) - 2 E (f \cdot E(f)) + E( E(f)^2 )
+    =
+    \\
+    =
+    E(f^2) - 2 E(f)^2 + E(f)^2
+    =
+    E(f^2) - E(f)^2
+\end{gather*}
+
+\begin{thrm}{Неравенство Чебышева}{}
+    Пусть \( f \) --- случайная величина, \( \alpha > 0 \)
+
+    Тогда \( P(|f - E(f)| \geq \alpha) \leq \frac{D(f)}{\alpha^2} \)
+\end{thrm}
+
+Пусть \( g = (f - E(f))^2 \geq 0 \)
+
+Тогда
+\(
+    \displaystyle
+    P(|f - E(f)| \geq \alpha) = P(g \geq \alpha^2) \leq \frac{E(g)}{\alpha^2} = \frac{D(f)}{\alpha^2}
+\)
+
+\subsection{Независимые случайные величины}
+
+\begin{defn}{}{}
+    Случайные величины \( f, g \) называются независимыми,
+    если \( \forall x, y \in \RR \) выполнено \( P(f = x \cap g = y) = P(f = x) \cdot P(g = y) \)
+
+    Случайные величины \( f_1, \ldots, f_k \) независимы в совокупности,
+    если \( \forall x_1, \ldots, x_k \in \RR \) события
+    ``\( f_1 = x_1 \)'', \ldots, ``\( f_k = x_k \)'' --- независимые в совокупности.
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( f, g \) --- независимые случайные величины, тогда \( E(fg) = E(f) E(g) \)
+\end{thrm}
+
+\begin{gather*}
+    E(f) = \sum\limits_{x \in \RR} x \cdot P(f = x), E(g) = \sum\limits_{y \in \RR} y \cdot P(g = y)
+    \\
+    E(f) E(g)
+        = \left( \sum\limits_{x \in \RR} x \cdot P(f = x) \right)
+        \left( \sum\limits_{y \in \RR} y P(g = y) \right)
+    =
+    \\
+    =
+    \sum\limits_{x, y \in \RR} xy \cdot P(f = x) \cdot P(g = y) = \sum\limits_{x, y \in \RR} xy \cdot P(f = x, \: g = y)
+    =
+    E(fg)
+\end{gather*}
+
+\begin{thrm}{}{} 
+    Пусть \( f, g \) --- независимые случайные величины, тогда \( D(f + g) = D(f) + D(g) \)
+\end{thrm}
+
+\begin{gather*}
+    D(f + g)
+    =
+    E(f + g)^2 - (E(f + g))^2
+    =
+    E(f^2 + 2fg + g^2) - (E(f) + E(g))^2
+    =
+    \\
+    =
+    E(f^2) + 2E(fg) + E(g^2) - (E(f))^2 - 2 E(f) E(g) - (E(g))^2
+    =
+    \\
+    =
+    (E(f^2) - (E(f))^2) + (E(g^2) - (E(g))^2)
+    =
+    D(f) + D(g)
+\end{gather*}
+
+\begin{exercise}{}{}
+    Докажите эти факты для \( n \) независимых в совокупности величин
 \end{exercise}
