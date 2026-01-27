@@ -498,3 +498,232 @@
 \begin{exercise}{}{}
     Докажите эти факты для \( n \) независимых в совокупности величин
 \end{exercise}
+
+\subsection{Оценки биномиальных коэффициентов}
+
+Подбросим монету \( n \) раз (\( n \vdots 2 \)), посчитаем вероятность того, что выпала ровно половина орлов:
+\[
+    P \left( \text{выпало \( \frac{n}{2} \)} \right) = \frac{C_n^{n / 2}}{2^n}
+\]
+
+\begin{thrm}{Формула Стирлинга}{}
+    \[
+        n! \sim \sqrt{2 \pi n} \left( \frac{n}{e} \right)^n
+    \]
+\end{thrm}
+
+\[
+    \frac{C_n^{n / 2}}{2^n}
+    =
+    \frac{n!}{ (n / 2)! \cdot (n / 2)! \cdot 2^n}
+    \sim
+    \frac{\sqrt{2 \pi n} \left( \frac{n}{e} \right)^n }{2^n \cdot \pi n \cdot \left( \frac{n}{2e} \right)^n }
+    =
+    \frac{\sqrt{2 \pi n}}{\pi n}
+    =
+    \frac{\sqrt{2}}{\sqrt{\pi n}}
+\]
+
+\begin{thrm}{Оценка биномиальных коэффициентов}{}
+    \[
+        \left( \frac{n}{k} \right)^k \leq C_n^k \leq \left( \frac{ne}{k} \right)^k
+    \]
+\end{thrm}
+
+\[
+    C_n^k
+    =
+    \frac{n \cdot (n - 1) \cdot \ldots \cdot (n - k + 1)}{k \cdot (k - 1) \cdot \ldots \cdot 1}
+    \geq
+    \left( \frac{n}{k}\right)^k
+\]
+
+Вспомним факт \( \forall x \in \RR \quad e^x \geq 1 + x \).
+
+Для оценки сверху покажем, что
+\(
+    \displaystyle
+    \sum \limits_{i = 0}^{k} C_n^i \leq \left( \frac{ne}{k} \right)^k
+\)
+
+Рассмотрим \( t \in (0, 1) \):
+\[
+    \sum \limits_{i = 0}^{k} C_n^i
+    \leq
+    \sum \limits_{i = 0}^{k} C_n^i \cdot \frac{t^i}{t^k}
+    =
+    \frac{1}{t^k} \sum \limits_{i = 0}^{k} C_n^i \cdot t^i
+    \leq
+    \frac{1}{t^k} (1 + t)^n
+\]
+
+Возьмем \( t = \frac{k}{n} \):
+\[
+    \sum \limits_{i = 0}^{k} C_n^i
+    \leq
+    \frac{n^k}{k^k} \cdot \left( 1 + \frac{k}{n} \right)^n
+    =
+    \left( \frac{n}{k} \right)^k \cdot \left( 1 + \frac{k}{n} \right)^{\frac{n}{k} \cdot k}
+    \leq
+    \left( \frac{n}{k} \right)^k \cdot e^{k}
+    =
+    \left( \frac{ne}{k} \right)^k
+\]
+
+\subsection{Вероятностные методы}
+
+\begin{lemma}{Вероятностный метод}{}
+    Пусть \( f : \Omega \to \RR \) --- случайная величина, \( E(f) = c \).
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            \( \exists \omega_{ \min } \in \Omega : f ( \omega_{ \min } ) \leq c \)
+        \item
+            \( \exists \omega_{ \max } \in \Omega : f ( \omega_{ \max } ) \geq c \)
+    \end{enumerate}
+\end{lemma}
+
+Доказательство: тривиально
+
+\begin{defn}{}{}
+    \( G = (V, E) \) --- простой неориентированный граф.
+
+    Разрез в \( G \) --- это \( S \subseteq V \).
+
+    Величина разреза --- это \( | E(S, V \setminus S) | \)
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( G = (V, E) \) --- простой неориентированный граф,
+    тогда существует разрез величины хотя бы \( \frac{|E|}{2} \).
+\end{thrm}a
+
+\( \Omega = 2^V, \quad | \Omega | = 2^n \), каждый разрез равновероятен.
+
+За случайную величину примем величину разреза.
+
+Очевидно, что \( E(X) = \frac{|E|}{2} \) (доказывается через индикаторы).
+
+\begin{thrm}{}{}
+    Пусть в графе \( G = (V, E) \) \( 2n \) вершин, тогда сушествует разрез
+    величины хотя бы \( \frac{|E| \cdot n}{2n - 1} \).
+\end{thrm}
+
+Давайте выбирать все разрезы размера \( n \) равновероятно.
+
+\[
+    E(I_e)
+    =
+    \frac{2 \cdot C_{2n - 2}^{n - 1}}{C_{2n}^n}
+    =
+    \frac{2 \cdot (2n - 2)! \cdot n! \cdot n!}{(2n)! \cdot (n - 1)! \cdot (n - 1)!}
+    =
+    \frac{2 \cdot n \cdot n}{2n \cdot (2n - 1)}
+    =
+    \frac{n}{2n - 1}
+\]
+
+\begin{exercise}{}{}
+    Проделайте то же самое для нечетного числа вершин:
+
+    Если в графе \( 2n + 1 \) вершина, то есть разрез величины \( \frac{|E| (n + 1)}{2n + 1} \)
+\end{exercise}
+
+\subsection{Нижняя оценка числа Рамсея}
+
+\begin{lemma}{}{}
+    Пусть \( A_1, \ldots, A_n \) --- события.
+
+    Тогда \( P(A_1 \cup \ldots \cup A_n) \leq \sum P(A_i) \)
+\end{lemma}
+
+\begin{remark}{}{}
+    \[
+        R(n, k) \leq \binom{n + k - 2}{n - 1}
+    \]
+\end{remark}
+
+\begin{coroll}{}{}
+    \[
+        R(k, k) \leq \binom{2k - 2}{k - 1} < 2^{2k - 2}
+    \]
+\end{coroll}
+
+\begin{thrm}{}{}
+    \[
+        R(k, k) > \left[ \frac{k \cdot 2^{k / 2}}{2e}\right], \quad k \geq 3
+    \]
+\end{thrm}
+
+Хотим построить граф на \( n = \left[ \frac{k \cdot 2^{k / 2}}{2e} \right] \) вершинах
+без клик и независимых множеств размера \( k \).
+
+\( \Omega \) --- все графы на \( n \) вершинах равновероятно,
+\(
+    \displaystyle
+    | \Omega | = 2^{\binom{n}{2}}
+\)
+
+Для \( W \subseteq \{ 1, 2, \ldots, n \} \) посчитаем вероятности событий:
+\begin{enumerate}
+    \item
+        \( A_W \) = \( W \) --- клика
+    \item
+        \( B_W \) = \( W \) --- независимое множество
+\end{enumerate}
+
+\[
+    P(A_W) = P(B_W) = \frac{2^{\binom{n}{2} - \binom{k}{2}}}{2^{\binom{n}{2}}}
+\]
+
+\begin{gather*}
+    P(\text{в \( G \) есть клика или независимое множество размера \( k \)})
+    =
+    P \left( \bigcup\limits_W (A_W + B_W) \right)
+    \leq
+    \\
+    \leq
+    \sum\limits_W ( P(A_W) + P(B_W) )
+    =
+    \binom{n}{k} \cdot 2^{1 - \binom{k}{2}}
+    \leq
+    \left( \frac{ne}{k} \right)^k \cdot 2^{1 - \binom{k}{2}}
+    \leq
+    \\
+    \left( \frac{k \cdot 2^{k / 2} \cdot e}{2e \cdot k} \right)^k \cdot 2^{1 - \binom{k}{2}}
+    =
+    \left( \frac{2^{k / 2}}{2} \right)^k \cdot 2^{1 - \binom{k}{2}}
+    =
+    2^{\frac{k^2}{2} - k + 1 - \frac{k(k - 1)}{2}}
+    =
+    2^{1 - \frac{k}{2}}
+\end{gather*}
+
+Что меньше единицы при \( k \geq 3 \)
+
+Значит с какой-то ненулевой вероятностью нам может попасть граф, для которого число Рамсея удовлетворяет
+оценке из теоремы, что и требовалось доказать.
+
+\subsection{Теорема Эрдеша}
+
+\begin{thrm}{}{}
+    \( \forall{k} \in \NN \)
+
+    Существует граф \( G \) такой, что:
+    \begin{enumerate}
+        \item
+            \( S(G) > k \) (нет циклов длины \( k \) и меньше)
+        \item
+            \( \mathcal{X} (G) > k \)
+    \end{enumerate}
+\end{thrm}
+
+План доказательства:
+\begin{enumerate}
+    \item
+        Используем модель Эрдеша-Реньи случайных графовв \( G(n, p), p \in [0, 1] \):
+        каждое ребро проводится с вероятностью \( p \)
+    \item
+        Воспользуемся тем, что \( \mathcal{X}(G) \geq \frac{|V|}{\alpha(G)} \)
+\end{enumerate}
