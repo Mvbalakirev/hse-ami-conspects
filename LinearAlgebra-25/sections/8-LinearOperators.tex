@@ -1,0 +1,826 @@
+\section{Линейные операторы}
+
+\subsection{Определение}
+
+\begin{defn}{}{}
+    Пусть \( V \) --- векторное пространство надо \( F \).
+
+    Линейное отображение \( \Phi : V \to V \) называется линейным оператором.
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( \Phi(v) = 0 \)
+        \item
+            \( \Phi(v) = v \)
+        \item
+            Поворот вектора на \( \varphi \) против часовой:
+            \( 
+                \displaystyle
+                \begin{pmatrix}
+                    x
+                    \\
+                    y
+                \end{pmatrix}
+                \mapsto
+                \begin{pmatrix}
+                    \cos \varphi & -\sin \varphi
+                    \\
+                    \sin \varphi & \cos \varphi
+                \end{pmatrix}
+                \begin{pmatrix}
+                    x
+                    \\
+                    y
+                \end{pmatrix}
+            \)
+        \item
+            \( U, W \subseteq V \)
+
+            \( 
+                \begin{cases}
+                    U \cap W = 0
+                    \\
+                    U + W = V
+                \end{cases}
+            \)
+
+            \( V = U \oplus W \)
+
+            \( v = u + w \)
+
+            \( \Phi(v) = u \) --- проектирование на \( U \) вдоль \( W \)
+    \end{itemize}
+\end{example}
+
+\( V \) --- векторное пространство с базисом \( (e_1, \ldots, e_n) = e \)
+
+Тогда 
+\(
+    v = 
+    \begin{pmatrix}
+        e_1 & \ldots & e_n
+    \end{pmatrix}
+    \begin{pmatrix}
+        x_1
+        \\
+        \vdots
+        \\
+        x_n
+    \end{pmatrix}
+\), и можно перейти от \( V \) к \( F^n \).
+Тогда хотелось бы по линейному оператору в \( V \) получить линейный оператор в \( F^n \).
+Для этого есть матрица линейного отображения (зависит от базиса):
+\[
+    \Phi(e_1, \ldots, e_n) = (e_1, \ldots, e_n)
+    \begin{pmatrix}
+        & &
+        \\
+        & A &
+        \\
+        & &
+    \end{pmatrix}
+\]
+
+Получаем, что \( \Phi \) делает
+\(
+    \begin{pmatrix}
+        x_1
+        \\
+        \vdots
+        \\
+        x_n
+    \end{pmatrix}
+    \mapsto
+    A
+    \begin{pmatrix}
+        x_1
+        \\
+        \vdots
+        \\
+        x_n
+    \end{pmatrix}
+\)
+
+\subsection{Смена координат}
+
+Если для базисов верно \( (e_1, \ldots, e_n) C = (e_1', \ldots, e_n') \),
+то для координат:
+\[
+    \begin{pmatrix}
+        x_1
+        \\
+        \vdots
+        \\
+        x_n
+    \end{pmatrix}
+    \mapsto
+    C
+    \begin{pmatrix}
+        x_1
+        \\
+        \vdots
+        \\
+        x_n
+    \end{pmatrix}
+\]
+
+Тогда получим:
+\begin{gather*}
+    \Phi(e_1, \ldots, e_n) = (e_1, \ldots, e_n) A
+    \\
+    \Phi(e_1', \ldots, e_n') = (e_1', \ldots, e_n') A'
+    \\
+    A' = C^{-1} A C
+    \\
+    x' = C^{-1} x
+\end{gather*}
+
+\subsection{Матричные характеристики}
+
+Хотелось бы найти для нашего линейного оператора характеристику,
+которая бы вне зависимости от выбора базиса для матрицы перехода
+давали одно и то же число:
+\begin{itemize}
+    \item
+        След
+
+        \( \tr (A') = \tr (C^{-1} \cdot A C) = \tr (AC \cdot C^{-1}) = \tr (A) \)
+    \item
+        Определитель
+
+        \( \det (A') = \det (C^{-1} AC) = \det (A) \)
+    \item
+        Ранг
+
+        \( \rk (A') = \rk A \)
+    \item
+        Характеристический многочлен
+
+        \( \mathcal{X}_{A'} (t) = \mathcal{X}_A (t) \)
+        \begin{gather*}
+            \mathcal{X}_{A'} (t) = \det (tE - A') = \det(tC^{-1}C) =
+            \\
+            = \det(C^{-1} (tE - A) C) = \det(tE - A) = \mathcal{X}_A (t)
+        \end{gather*}
+    \item
+        \( f_{\min A'} = f_{\min A} \)
+
+        \( f_{\min A} ( C^{-1}AC ) = C^{-1} f_{\min A} (A) C = 0 \Rightarrow f_{\min A'} \: | \: f_{\min A} \)
+
+        Повторив аналогично в другую сторону, получим искомое.
+
+        Заодно можем определить \( f(\Phi) = a_n \Phi^n + \ldots + a_1 \Phi + a_0 id \)
+    \item
+        \( spec_F A = spec_F A' \)
+\end{itemize}
+
+\subsection{}
+
+Еще можно вспомнить, что \( \dim \ker \Phi + \dim Im \: \Phi = \dim V \). Отсюда получим прикольный факт.
+\begin{lemma}{}{}
+    \( \Phi : V \to V \) --- линейный оператор
+
+    Тогда эквиваленты следующие утверждения:
+    \begin{enumerate}
+        \item
+            \( \Phi \) --- обратимо
+        \item
+            \( \ker \Phi = 0 \)
+        \item
+            \( Im \: \Phi = V \)
+    \end{enumerate}
+\end{lemma}
+
+Причем если \( x \mapsto Ax \),
+то такие утверждения равносильны:
+\begin{enumerate}
+    \item
+        \( A \) --- обратима
+    \item
+        \( Ax = 0 \Rightarrow x = 0 \)
+    \item
+        \( Ax = b \) имеет решение \( \forall b \)
+\end{enumerate}
+
+\begin{example}{}{}  
+    Рассмотрим поворот на плоскости на \( \alpha \neq \pi k \)
+
+    Никакая прямая тогда не перейдет в себя \( \Rightarrow \) это не линейный оператор на них.
+\end{example}
+
+\subsection{\( \Phi \)-инвариантные подпространства}
+
+\begin{defn}{}{}
+    \( U \subseteq V \) --- \( \Phi \)-инвариантное подпространство, если \( \Phi(U) \subseteq U \)
+
+    Тогда можно рассматривать \( \Phi|_U : u \mapsto \Phi(u) \)
+\end{defn}
+
+Пусть \( V = U \oplus W \) и \( e_1, \ldots, e_k \) --- базис \( U \), а \( e_{k + 1}, \ldots, e_n \) --- базис \( W \)
+
+\[
+    \Phi(e_1, \ldots, e_k, e_{k + 1}, \ldots, e_n) = (e_1, \ldots, e_k, e_{k + 1}, \ldots, e_n)
+    \begin{pmatrix}
+        A & B
+        \\
+        C & D
+    \end{pmatrix}
+\]
+
+Если \( U \) --- \( Phi \)---инвариантное, то \( \Phi(e_i) \in U \).
+Но если рассмотреть, куда переходит \( (e_1, \ldots, e_k) \),
+то мы получим, что \( C = 0 \).
+Аналогично, если \( W \) --- \( Phi \)---инвариантное, то \( B = 0 \)
+
+Инвариантная прямая:
+
+\( \Phi : V \to V \)
+
+\( U = <v> \), \( v \neq 0 \)
+
+\( \Phi(U) \subseteq U \)
+
+\( \Phi(v) \in U \)
+
+\( \Phi(v) = \lambda v \)
+
+% TODO
+TODO (21.01)
+
+\begin{lemma}{}{}
+    \( \Phi : V \to V \)
+
+    Следующие утверждения эквивалентны:
+    \begin{enumerate}
+        \item
+            \( \Phi \) --- диагонализируем
+        \item
+            Существует базис из собственных векторов
+        \item
+            \( V = V_{\lambda_1} \oplus \ldots \oplus V_{\lambda_S} \)
+        \item
+            а) \( \mathcal{X} (t) = (t - \lambda_1)^{k_1} \cdot \ldots \cdot (t - \lambda_s)^{k_s} \)
+
+            б) \( \dim V_{\lambda_i} = k_i \)
+    \end{enumerate}
+\end{lemma}
+
+\begin{itemize}
+    \item
+        \( (1) \to (2) \) и \( (2) \to (1) \) очевидно
+    \item
+        \( (2) \to (3) \)
+
+        Рассмотрим базис \( e_1, \ldots, e_n \) и разобьем на части:
+        все из \( V_{\lambda_1} \), \ldots, все из \( V_{\lambda_s} \).
+
+        Если сложить линейные оболочки из каждой группы, но мы, очевидно, получим \( V \).
+        Значит сумма ``больших'' подпространств тем более дает \( V \)
+        (ранее доказывали, что прямая сумма собственных подпространств лежит в \( V \))
+    \item
+        \( (3) \to (2) \)
+
+        Возьмем базисы для каждого \( V_{\lambda_i} \), они собственные по определению.
+        Объединим их, получим базис \( V \).
+    \item
+        \( (1, 2, 3) \to (4) \)
+
+        Пункт а) следует из диагонализируемости оператора,
+        причем степень \( k_i \) --- это сколько раз \( \lambda_i \)
+        встречается на диагонали.
+
+        Давайте решим \( (A_{\Phi} - \lambda_i E) X = 0 \).
+        Ядро этого оператора --- \( V_{\lambda_i} \),
+        но в такой системе уравнений у нас диагональная матрица
+        с \( k_i \) нулями на ней --- то есть размерность ядра равна \( k_i \).
+    \item
+        \( (4) \to (3) \)
+
+        Знаем, что \( V_{\lambda_1} \oplus \ldots \oplus V_{\lambda_s} \subseteq V \).
+        Хотим убедиться, что сумма размерностей пространств слева равна размерности справа.
+        Но \( k_1 + \ldots + k_s = n \) --- доказали.
+\end{itemize}
+
+\subsection{Какие-то фокусы с многочленами и операторами}
+
+\begin{lemma}{}{}
+    \( \Phi : V \to V / F \)
+
+    \( p, q \in F[t], \: (p, q) = 1 \).
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            \( \ker p(\Phi) \cap \ker q(\Phi) = 0 \)
+        \item
+            \( \ker q(\Phi) \) является \( p(\Phi) \)-инвариантым
+
+            \( p(\Phi)|_{\ker q(\Phi)} \) --- обратимый
+    \end{enumerate}
+\end{lemma}
+
+\begin{gather*}
+    (p, q) = 1 \Rightarrow \exists u, v \in F[t]
+    \\
+    1 = u(t) p(t) + v(t) q(t)
+    \\
+    id = u(\Phi) p(\Phi) + v(\Phi) q(\Phi)
+    \\
+    \\
+    z \in \ker p(\Phi) \cap \ker q(\Phi)
+    \\
+    z = u(\Phi) p(\Phi) (z) + v(\Phi) q(\Phi) (z) = u(\Phi) (0) + v(\Phi) (0) = 0
+\end{gather*}
+
+\( p(\Phi) \) и \( q(\Phi) \) коммутируют,
+значит \( \ker q(\Phi) \) является \( p(\Phi) \) инвариантным.
+Поэтому можем ограничить \( p(\Phi) \) на \( \ker q(\Phi) \).
+
+Ранее выясняли, что для проверки обратимости оператора достаточно убедиться,
+что его ядро равно \( 0 \).
+Но по определению ядро этого оператора равно \( \ker p(\Phi) \cap \ker q(\Phi) \).
+Что и требовалось доказать.
+
+\begin{lemma}{}{}
+    \( \Phi : V \to V / F \)
+
+    \( p, q \in F[t], \: (p, q) = 1 \)
+
+    \( f = p \cdot q \) и \( f(\Phi) = 0 \)
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            \( \Img p(\Phi) = \ker q(\Phi) \)
+
+            \( \Img q(\Phi) = \ker p(\Phi) \)
+        \item
+            \( V = \ker p(\Phi) \oplus \ker q(\Phi) \)
+        \item
+            \( U \subseteq V \) --- подпространство
+
+            \( U_1 = U \cap \ker p(\Phi) \)
+
+            \( U_2 = U \cap \ker q(\Phi) \)
+
+            Если \( U \) --- \( \Phi \)-инвариантно,
+            то \( U_1 \) и \( U_2 \) тоже, причем \( U = U_1 \oplus U_2 \)
+    \end{enumerate}
+
+    Если дополнительно известно, что \( f = f_{\min \Phi} \),
+    то:
+    \begin{itemize}
+        \item
+            \( p = f_{\min \Phi |_{\ker p(\Phi)}} \)
+        \item
+            \( q = f_{\min \Phi |_{\ker q(\Phi)}} \)
+    \end{itemize}
+\end{lemma}
+
+\textbf{Первое:}
+
+\begin{gather*}
+    (p, q) = 1
+    \\
+    1 = u(t) p(t) + v(t) q(t)
+    \\
+    id = u(\Phi) p(\Phi) + v(\Phi) q(\Phi)
+    \\
+    0 = p(\Phi) q(\Phi) = q(\Phi) p(\Phi)
+\end{gather*}
+
+Если \( qp = 0 \), то \( \Img p(\Phi) \subseteq \ker q(\Phi) \).
+Докажем в обратную сторону.
+Возьмем \( z \in \ker q(\Phi) \):
+\begin{gather*} 
+    z = u(\Phi) p(\Phi) (z) + v(\Phi) q(\Phi) (z)
+    \\
+    z = u(\Phi) p(\Phi) (z) + v(\Phi) (0)
+    \\
+    z = u(\Phi) p(\Phi) (z)
+    \\
+    z = p(\Phi) u(\Phi) (z)
+\end{gather*}
+
+Представили \( z \) в виде \( p(\Phi) (v) \).
+
+\textbf{Второе:}
+
+Нужно доказать, что:
+\[
+    \begin{cases}
+        0 = \ker p(\Phi) \cap \ker q(\Phi)
+        \\
+        V = \ker p(\Phi) \cup \ker q(\Phi)
+    \end{cases}
+\]
+
+Первое знаем из факта ранее,
+а для доказательство второго нужно проверить равенство размерностей.
+Заменим \( \ker q(\Phi) \) на \( \Img p(\Phi) \), получим искомое.
+
+\textbf{Третье:}
+
+\begin{gather*}
+    V = \ker p(\Phi) \oplus \ker q(\Phi)
+    \\
+    U_1 = U \cap \ker p(\Phi)
+    \\
+    U_2 = U \cap \ker q(\Phi)
+\end{gather*}
+
+Поскольку изначально ядра пересекаются по нулю,
+получаем, что \( U_1 \oplus U_2 \subseteq U \).
+Осталось доказать равенство.
+
+\[
+    z = u(\Phi) p(\Phi) (z) + v(\Phi) q(\Phi) (z)
+\]
+
+Заметим, что
+\(
+    u(\Phi) p(\Phi) (z) \in \Img p(\Phi) = \ker q(\Phi)
+\).
+То есть по сути умеем находить разложение вида \( z = x + y \), где \( x \in \ker p(\Phi) \), а \( y \in \ker q(\Phi) \).
+Но \( U \) является \( \Phi \)-инвариантным, поэтому \( u(\Phi) p(\Phi) (z) \in U \).
+Но это значит, что \( u(\Phi) p(\Phi) (z) \in U \cap \ker q(\Phi) \),
+то есть оно принадлежит \( U_2 \).
+Аналогично показывается, что второе слагаемое лежит в \( U_1 \).
+Значит доказали равенство.
+
+\textbf{Четвертое:}
+
+\[
+    V = \ker p(\Phi) \oplus \ker q(\Phi)
+\]
+
+Очевидно, что \( \Phi |_{\ker p(\Phi)} \) является зануляющим.
+Значит \( p(t) \) --- зануляющий для него.
+Мы хотели бы доказать, что еслти \( f \) --- минимальный, то и \( p \) тоже минимальный для такого множества.
+Доказывается от противного:
+пусть есть \( p_0 \) меньшей степени, тогда \( f_0 = p_0 \cdot q \) тоже зануляет \( \Phi \).
+
+\begin{lemma}{}{}
+    \( \Phi : V \to V \)
+
+    \( f_{\min} = (t - \lambda)^k g(t), g(\lambda) \neq 0  \)
+
+    Тогда верно
+    \[
+        0
+        \subsetneq
+        \ker (\Phi - \lambda id)
+        \subsetneq
+        \ker (\Phi - \lambda id)^2
+        \subsetneq
+        \ldots
+        \subsetneq
+        \ker (\Phi - \lambda id)^k
+        =
+        \ker (\Phi - \lambda id)^{k + 1}
+        =
+        \ldots
+    \]
+\end{lemma}
+
+\begin{remark}{}{}
+    То есть \( V^{\lambda} = \ker (\Phi - \lambda id)^k \)
+\end{remark}
+
+\begin{enumerate}
+    \item
+        Покажем, что \( V^{\lambda} \subseteq \ker (\Phi - \lambda id)^k \).
+
+        \( f_{\min \Phi} (\Phi) : V^\lambda \to V^\lambda \)
+
+        \( (\Phi - \lambda id)^k \cdot g(\Phi) (v) = 0 \)
+
+        Заметим, что на \( g(\Phi) \) можно сократить (доказывали для взаимнопростых многочленов на прошлой лекции),
+        поэтому вложение верно.
+
+        Поскольку верно вложение в обратную сторону, получили \( V^{\lambda} = \ker (\Phi - \lambda id)^k \)
+    \item
+        Покажем, что степень \( k \) нельзя понизить.
+
+        Покажем от противного, пусть можно понизить.
+        Но тогда \( (\Phi - \lambda id)^{k_0} g(\Phi) \) тоже зануляет --- противоречие.
+
+        %TODO
+        [TODO]
+\end{enumerate}
+
+\newpage
+
+\begin{lemma}{}{}
+    \( \Phi : V \to V / F \)
+
+    \( \Phi^m = 0 \Rightarrow \mathcal{X}_{\Phi}(t) = t^{\dim V} \)
+\end{lemma}
+
+Знаем, что \( t^m \) --- зануляющий.
+\begin{gather*}
+    \mathcal{X}_{\Phi} (\Phi) = t^k \cdot g(t), (t, g) = 1
+    \\
+    V = \ker \Phi^k \oplus \ker g(\Phi)
+\end{gather*}
+
+Значит \( \Phi^k \) обратим на \( g(\Phi) \) --- такое может быть только если пространство нулевое.
+Это прикольно, но нам не поможет.
+
+\textbf{Короткий, но не до конца доказанный путь}
+
+Давайте вложим \( F \) в алгебраически замкнутое поле \( L \) (самое нетривиальное --- понять, что такое есть).
+Поскольку матрица оператора не изменилась, наш характеристический многочлен не поменялся,
+и все еще \( \Phi^m = 0 \). В нашем новом поле \( \mathcal{X}_{\Phi} (t) \vdots f_{\min \Phi} \),
+то есть \( \mathcal{X}_{\Phi} (t) = t^k \).
+
+\textbf{Кустарные методы}
+
+\begin{lemma}{}{}
+    \( \Phi : V \to V \)
+
+    \( f_{\min \Phi} = (t - \lambda_1)^{k_1} \cdot \ldots \cdot (t - \lambda_s)^{k_s} \)
+
+    Тогда существует базис \( e_1, \ldots, e_n \) такой,
+    что в нем матрица многочлена является верхнетреугольной,
+    а на ее диагонали стоят корни минимального зануляющего.
+\end{lemma}
+
+\( \lambda_1 \) --- корень \( f_{\min} \).
+
+\( \lambda_1 \in spec_F \Phi = \) собственные значения
+
+\( \exists e_1 \in V : \Phi e)1 = \lambda_1 e_1 \).
+
+Значит справились сделать такое:
+\[
+    \Phi (e_1, \ldots, e_n) = (e_1, \ldots, e_n)
+    \begin{pmatrix}
+        \lambda_1 & * & \ldots & *
+        \\
+        0 & \ & \ & \
+        \\
+        \vdots & \ & B & \
+        \\
+        0 & \ & \ & \
+        \\
+    \end{pmatrix}
+\]
+
+На матричном языке это означает, что
+\[
+    \exists C : C^{-1} A C
+    =
+    \begin{pmatrix}
+        \lambda_1 & * & \ldots & *
+        \\
+        0 & \ & \ & \
+        \\
+        \vdots & \ & B & \
+        \\
+        0 & \ & \ & \
+        \\
+    \end{pmatrix}
+\]
+
+Хочетс воспользовать индукцией.
+
+Заметим, что если запихнуть в многочлен верхнетреугольную матрицу, 
+то на диагонали к элементам просто применится многочлен + что-то произойдет с оставшимися элементами.
+
+\[
+    f_{\min A} = (C^{-1} A C) = C^{-1} f_{\min A} (A) C = C^{-1} \cdot 0 \cdot C = 0
+\]
+
+Но тогда по предыдущему утверждению \( f_{\min A} (B) = 0 \Rightarrow f_{\min A} \vdots f_{\min B} \).
+
+Тогда индукцией по размеру \( \exists T \in M_{n - 1} (F) : T^{-1} B T \) --- верхнетреугольная матрица нужного нам вида.
+
+\begin{gather*}
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & T^{-1}
+    \end{pmatrix}
+    C^{-1}
+    A
+    C
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & T
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 0
+        \\
+        0 & T^{-1}
+        \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        \lambda_1 & * & \ldots & *
+        \\
+        0 & \ & \ & \
+        \\
+        \vdots & \ & B & \
+        \\
+        0 & \ & \ & \
+        \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 0
+        \\
+        0 & T
+        \\
+    \end{pmatrix}
+    =
+    \\
+    \\
+    =
+    \begin{pmatrix}
+        \lambda_1 & * & \ldots & *
+        \\
+        0 & \ & \ & \
+        \\
+        \vdots & \ & T B T^{-1} & \
+        \\
+        0 & \ & \ & \
+        \\
+    \end{pmatrix}
+\end{gather*}
+
+Победа.
+
+\begin{coroll}{}{}
+    \begin{gather*}
+        \mathcal{X}_{\Phi} (t) = (t - \lambda_1)^{d_1} \cdot \ldots (t - \lambda_s)^{d_s}
+        \\
+        k_1 \leq d_1, \ldots, k_s \leq d_s
+        \\
+        \sum d_i = \dim V
+    \end{gather*}
+\end{coroll}
+
+\begin{thrm}{}{}
+    \( \Phi : V \to V / F \)
+
+    \( \lambda \in \spec_F \Phi \)
+
+    \( f_{\min} = (t - \lambda)^k \cdot g(t) \), \( g(\lambda) \neq 0 \)
+
+    \( \mathcal{X}_{\Phi} = (t - \lambda)^d \cdot h(t) \), \( h(\lambda) \neq 0 \)
+
+    Тогда
+    \begin{enumerate}
+        \item
+            \( V^{\lambda} = \ker (\Phi - \lambda id)^k \)
+
+            \( V^{\lambda} \not\supseteq \ker (\Phi - \lambda id)^{k - 1} \)
+        \item
+            \( d = \dim V \)
+    \end{enumerate}
+\end{thrm}
+
+я ничего не понимаю
+
+\begin{lemma}{}{}
+    \( \Phi : V \to V / F \)
+
+    \( f_{\min \Phi} = (t - \lambda_1)^{k_1} \cdot \ldots \cdot (t - k_s)^{\lambda_s} \)
+
+    Тогда \( V = V^{\lambda_1} \oplus \ldots \oplus V^{\lambda_s} \) и \( V^{\lambda_i} = \ker (\Phi - \lambda_i id)^{k_i} \)
+\end{lemma}
+
+\newpage
+
+\section{Функционалы}
+
+\begin{defn}{}{}
+    \( V \) --- векторное пространство над \( F \)
+
+    \( V^* = \{ \xi : V \to F \: | \: \text{\( \xi \) --- линейное} \} = \hom_F (V, F) \) --- двойственное пространство
+
+    \( V^* \) --- тоже векторное пространство
+
+    \( \xi : V \to F \), \( \eta : V \to F \), \( \lambda \in F \)
+    \begin{itemize}
+        \item
+            \( (\xi + \eta) (v) = \xi(v) + \eta(v) \)
+        \item
+            \( (\lambda \cdot \xi) (v) = \lambda \cdot \xi (v) \)
+    \end{itemize}
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( (\RR^n)^* \) --- пространство строк
+        \item
+            \( \RR[x] \to \RR \), \( \lambda \in \RR \)
+
+            \( f \mapsto f(\lambda) \)
+        \item
+            \( C[a, b] \to \RR \)
+
+            \( f \mapsto \int\limits_{a}^{b} f(x) dx \)
+        \item
+            \( M_n (\RR) \to \RR \)
+
+            \( A \mapsto \tr (A) \)
+    \end{enumerate}
+\end{example}
+
+\begin{lemma}{}{}
+    \( V \) --- векторное пространство над \( F \)
+
+    \( e_1, \ldots, e_n \) --- базис \( V \)
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            \( \exists! \xi_1, \ldots, \xi_n \in V* \)
+
+            \(
+                \xi_i (e_j) = \begin{cases}
+                    1 \quad i = j 
+                    \\
+                    0 \quad i \neq j
+                \end{cases}
+            \)
+        \item
+            \( \xi_1, \ldots, \xi_n \) --- базис
+        \item
+            \( \xi \in V^* \ \xi = \xi (e_1) \xi_1 + \ldots + \xi (e_n) \xi_n \)
+
+            \( v \in V \)
+
+            \( v = \xi_1 (v) e_1 + \ldots + \xi_n(v) e_n \)
+    \end{enumerate}
+\end{lemma}
+
+\begin{defn}{}{}
+    \( (\xi_1, \ldots, \xi_n) \) --- двойственный базис к \( (e_1, \ldots, e_n) \).
+\end{defn}
+
+\begin{enumerate}
+    \item
+        Мы знаем, что базисный набор можно отправить куда угодно,
+        причем будет существовать единственное линейное отображение с таким свойством.
+        Отсюда сразу вытекает существование и единственность \( \xi_i \)
+    \item
+        Проверим, что наш набор является ЛНЗ порождающим.
+
+        \begin{itemize}
+            \item
+                ЛНЗ:
+
+                \( \lambda_1 \xi_1 + \ldots + \lambda_n \xi_n = 0 \) (в \( V^* \))
+
+                \( \forall v \in V \):
+
+                \( (\lambda_1 \xi_1 + \ldots + \lambda_n \xi_n)(v) = 0(v) \) (в \( F \))
+
+                Преобразуем обе части:
+
+                \( \lambda_1 \xi_1 (v) + \ldots + \lambda_n \xi_n(v) = 0 \)
+
+                Подставим \( e_i \), получим:
+
+                \( \lambda_i \cdot 1 = 0 \Rightarrow \lambda_i = 0 \)
+            \item
+                Порождающий:
+
+                Возьмем \( \xi \in V^* \)
+
+                Покажем, что \( \xi = \xi (e_1) \cdot \xi_1 + \ldots + \xi (e_n) \cdot \xi_n \) (в \( V^* \))
+
+                \( \xi(v) = (\xi (e_1) \cdot \xi_1 + \ldots + \xi (e_n) \cdot \xi_n)(v) \)
+
+                \( \xi(v) = \xi (e_1) \cdot \xi_1 (v) + \ldots + \xi (e_n) \cdot \xi_n (v) \)
+
+                Поскольку у нас линейные функции, достаточно проверить только на базисных векторах:
+
+                \( \xi(e_i) = \xi (e_1) \cdot \xi_1 (e_i) + \ldots + \xi (e_n) \cdot \xi_n (e_i) \)
+
+                \( \xi(e_i) = \xi (e_i) \cdot 1 \) --- ура, сошлось
+        \end{itemize}
+    \item
+        Проверим в лоб:
+
+        \( v = \lambda_1 e_1 + \ldots + \lambda_n e_n \)
+
+        \( \xi_i (v) = \xi_i(\lambda_1 e_1 + \ldots + \lambda_n e_n) \)
+
+        \( \xi_i (v) = \lambda_1 \xi_i (e_1) + \ldots + \lambda_n \xi_ i(e_n) \)
+
+        \( \xi_i (v) = \lambda_i \cdot 1 \) --- ура, доказали, что \( \xi_i (v) = \lambda_i \)
+\end{enumerate}
+
+\begin{coroll}{}{}
+    Если \( \dim V = n < \infty \),
+    то \( \dim V^* = n < \infty \).
+
+    Если же \( \dim V = \infty \),
+    то если вы верите в аксиому выбора, то \( \dim V^* > \dim V \),
+    а если не верите, то данный результат нельзя ни доказать, ни опровергнуть.
+\end{coroll}
