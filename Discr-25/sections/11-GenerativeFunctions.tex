@@ -2,9 +2,47 @@
 
 \subsection{Определение и операции}
 
-\begin{defn}{}{}
-    Есть последовательность чисел \( (a_1, a_2, \ldots, a_n, \ldots) \)
+\begin{defn}{Производящая функция}{}
+    Есть последовательность чисел \( (a_0, a_1, \ldots, a_n, \ldots) \)
+
+    Тогда \( A(x) = a_0 + a_1 x + \ldots + a_n x^n + \ldots = \sum\limits_{n = 0}^{\infty} a_n x^n \) называется ее ПФ.
 \end{defn}
+
+Операции с ПФ:
+\begin{itemize}
+    \item
+        Взятие свободного члена:
+
+        \( a_0 = A(0) \)
+    \item
+        Сложение:
+
+        \( [A + B]_n = a_n + b_n \)
+    \item
+        Умножение:
+
+        \( [AB]_n = \sum\limits_{k = 0}^{n} a_k b_{n - k} \)
+    \item
+        Деление:
+
+        \begin{lemma}{}{}
+            Если \( a_0 \neq 0 \),
+            то существует единственная \( B(x) \) такая,
+            что \( A(x) B(x) = 1 \)
+        \end{lemma}
+
+        Доказательство: поделите в столбик или по индукции найдите все коэффициенты \( B(x) \)
+
+        \begin{example}{}{}
+            \[
+                1 + x + \ldots + x^n + \ldots = \frac{1}{1 - x}
+            \]
+        \end{example}
+    \item
+        Взятие производной:
+
+        \( A(x)' = \sum\limits_{k = 0}^{n} (k + 1)a_{k + 1} x^k \)
+\end{itemize}
 
 \begin{example}{}{}
     \begin{gather*}
@@ -233,9 +271,12 @@
     \]
 \end{coroll}
 
-Заметим, что если мы введем производящую, то получим уравнение вида \( x \cdot C^2 (x) = C(x) - c_0 = C(x) - 1 \).
+Заметим, что если мы введем производящую, то получим уравнение вида:
+\[
+    C(x) = x C^2(x) + c_0 = x C^2(x) + 1
+\]
 
-Решив такое квадратное уравнение получим \( C_{12} (x) = \frac{1 \pm \sqrt{1 - 4x}}{2x} \).
+Решив такое квадратное уравнение получим \( C_{1,2} (x) = \frac{1 \pm \sqrt{1 - 4x}}{2x} \).
 
 \begin{thrm}{}{}
     \( C(x) = \dfrac{1 - \sqrt{1 - 4x}}{2x} \)
@@ -280,14 +321,14 @@
     =
     \\
     =
-    -\sum\limits_{n=1}^{\infty} \dfrac{\frac{1}{2} \cdot \left( \frac{1}{2} - 1 \right) \cdot \ldots
-    \cdot \left( \frac{1}{2} - 1 \right)}{n!} (-4x)^n
+    -\sum\limits_{n=1}^{\infty} \dfrac{\frac{1}{2} \cdot \left( \frac{1}{2} - n + 1 \right) \cdot \ldots
+        \cdot \left( \frac{1}{2} - 1 \right)}{n!} (-4x)^n
     =
     -\sum\limits_{n=1}^{\infty} \dfrac{1 (-1) (-3) \ldots (-2n + 3)}{2^n \cdot k!} (-4x)^n
     =
     \\
     =
-    \sum\limits_{n=1}^{\infty} \dfrac{2 \cdot 3 \cdot \ldots \cdot (2n - 3)}{2^n \cdot n!} 4^n x^n
+    \sum\limits_{n=1}^{\infty} \dfrac{1 \cdot 2 \cdot 3 \cdot \ldots \cdot (2n - 3)}{2^n \cdot n!} 4^n x^n
     =
     \sum\limits_{n=1}^{\infty} \dfrac{(2n - 2)! \cdot 2^n}{n! \cdot 2 \cdot 4 \cdot \ldots \cdot (2n-2)} x^n
     =
