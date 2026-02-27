@@ -23,8 +23,8 @@
 \end{example}
 
 База:
-\[ 
-    1 = \frac{1 \cdot 2}{2} 
+\[
+    1 = \frac{1 \cdot 2}{2}
 \]
 
 Переход:
@@ -73,7 +73,7 @@
         Принцип математической индукции:
         \[
         \begin{rcases}
-            A(1) \\ 
+            A(1) \\
             \forall n \ A(n) \Rightarrow A(n + 1)
         \end{rcases}
         \Rightarrow \forall n \ A(n)
@@ -97,7 +97,7 @@
 
 \begin{itemize}
     \item
-        \( 3 \rightarrow 1 \) 
+        \( 3 \rightarrow 1 \)
 
         Имеем \( A(1), A(2), \ldots, A(n), \ldots \) и \( A(n) \Rightarrow A(n + 1) \)
 
@@ -106,14 +106,14 @@
         Либо \( S \) пустое, либо в нем есть минимальный элемент \( s \).
         Но тогда либо \( s = 1 \) и неверна база, либо неверен переход \( A(s - 1) \Rightarrow A(s) \).
         Значит \( S \) пустое и все \( A(n) \) верны.
-    \item 
+    \item
         \( 2 \rightarrow 3 \)
 
         Есть \( S \neq \varnothing \). Пусть \( S \) не имеет наименьшего элемента.
-        
+
         \( A(n) = n \notin S \)
 
-        \( \forall k < n \ A(k) \Rightarrow A(n) \) 
+        \( \forall k < n \ A(k) \Rightarrow A(n) \)
 
         \( \forall k < n \ k \notin S \Rightarrow n \notin S \) --- иначе в \( S \) есть минимальный элемент.
 
@@ -122,14 +122,14 @@
         \( 1 \rightarrow 2 \)
 
         \( B(n) = A(1) \land A(2) \land \ldots \land A(n) \)
-        
+
         \[
             \begin{rcases}
                 B(1) = A(1)
-                \\ 
+                \\
                 B(n) \Rightarrow A(n) \Rightarrow A(n + 1) \Rightarrow B(n + 1)
             \end{rcases}
             \Rightarrow
             \forall n \ B(n)
-        \]  
+        \]
 \end{itemize}

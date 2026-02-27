@@ -1,6 +1,6 @@
 \section{Функции}
 
-\begin{defn}{Упорядоченная пара}{}   
+\begin{defn}{Упорядоченная пара}{}
     \( (a, b) = \{ \{ a \}, \{ a, b \} \} \)
 \end{defn}
 
@@ -14,8 +14,8 @@
 \end{defn}
 
 \begin{defn}{Функция}{function}
-Подмножество \( f \) декартова произведения \( X \times Y \) 
-называется функцией из \( X \) в \( Y \) (\(f : X \rightarrow Y \)), если 
+Подмножество \( f \) декартова произведения \( X \times Y \)
+называется функцией из \( X \) в \( Y \) (\(f : X \rightarrow Y \)), если
 \( \forall x \in X \: \exists ! \ (x, y) \in f \)
 \end{defn}
 
@@ -31,14 +31,14 @@
 Тогда \( f \) --- тотальная функция.
 
 \begin{defn}{Инъекция}{}
-    \( f \) --- инъекция (вложение) множества \( X \) на множество \( Y \), 
+    \( f \) --- инъекция (вложение) множества \( X \) на множество \( Y \),
     если
     \[
         f(x_1) = f(x_2) \Rightarrow x_1 = x_2
     \]
 \end{defn}
 \begin{defn}{Сюръекция}{}
-    \( f \) --- сюръекция (накрытие) множества \( X \) на множество \( Y \), 
+    \( f \) --- сюръекция (накрытие) множества \( X \) на множество \( Y \),
     если
     \[
         \forall y \in Y \: \exists x \in X : f(x) = y
@@ -67,11 +67,11 @@
 Доказательство:
 \begin{gather*}
     h \circ ( g \circ f ) : A \to D
-    \\ 
+    \\
     ( h \circ ( g \circ f ) ) (a) = h ( ( g \circ f )(a) ) = h(g(f(a)))
     \\
     ( h \circ g ) \circ f : A \to D
-    \\ 
+    \\
     ( ( h \circ g ) \circ f ) (a) = (h \circ g) ( f(a) ) = h(g(f(a)))
 \end{gather*}
 
@@ -91,7 +91,7 @@
 \end{defn}
 
 \begin{thrm}{Критерий биективности функций}{}
-    Пусть \( f : A \to B \). 
+    Пусть \( f : A \to B \).
 
     Тогда \( f \) --- биекция \( \Leftrightarrow \exists g : B \to A : f \circ g = id_B, g \circ f = id_A \)
 \end{thrm}
@@ -100,7 +100,7 @@
 \begin{itemize}
     \item
         \( \Rightarrow \)
-        
+
         Построим \( g : B \to A \)
 
         \( g(b) \in f^{-1}({b}) \)

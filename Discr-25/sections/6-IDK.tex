@@ -1,7 +1,7 @@
 \section{Формула включений-исключений}
 \begin{thrm}{Формула включений-исключений}{}
     \[
-        | A_1 \cup A_2 \cup \ldots \cup A_n | = 
+        | A_1 \cup A_2 \cup \ldots \cup A_n | =
         \sum\limits_{k = 1}^n \sum\limits_{1 \leq i_1 < \ldots < i_k \leq n} | A_{i_1} \cap \ldots \cap A_{i_k} |
     \]
 \end{thrm}
@@ -35,7 +35,7 @@
 \begin{enumerate}
     \item
         \( \forall A \ A \sim A \) (рефлексивность)
-    \item 
+    \item
         \( \forall A, B \ A \sim B \Rightarrow B \sim A \) (симметричность)
     \item
         \( \forall A, B, C \ A \sim B, B \sim C \Rightarrow A \sim C \) (транзитивность)
@@ -121,7 +121,7 @@
 \[
     g =
     \begin{cases}
-        x, x \notin C 
+        x, x \notin C
         \\
         f(x), x \in C
     \end{cases}
@@ -144,8 +144,8 @@
 \end{thrm}
 
 \begin{lemma}{}{}
-    \[ 
-        \BB^\infty \sim [0, 1) \sim [0, 1] \sim (0, 1) \sim \RR \sim 2^\NN 
+    \[
+        \BB^\infty \sim [0, 1) \sim [0, 1] \sim (0, 1) \sim \RR \sim 2^\NN
     \]
 \end{lemma}
 
@@ -174,8 +174,8 @@
 \( (x_1, x_2, \ldots) \leftrightarrow (x_1, x_3, \ldots ) (x_2, x_4, \ldots ) \)
 
 \begin{coroll}{}{}
-    \[ 
-        \RR^k \sim \RR 
+    \[
+        \RR^k \sim \RR
     \]
 \end{coroll}
 
@@ -214,7 +214,7 @@
     \item
         \( |X| \neq |2^X| \)
 
-        Докажем от противного. 
+        Докажем от противного.
         Пусть существует \( f : X \to 2^X \).
 
         Определим \( Y = \{ x \in X \ \vline \ x \notin f(x) \} \subseteq X \).
@@ -236,7 +236,7 @@
 \end{coroll}
 
 \begin{thrm}{Теорема Кантора Бернштейна}{}
-    \[ 
+    \[
         |A| \leq |B|, |B| \leq |A| \Rightarrow |A| = |B|
     \]
 \end{thrm}
@@ -245,14 +245,14 @@
 
 Пусть \( f : A \to B, g : B \to A \) --- инъекции.
 
-Определим \( C_0 = A \setminus g(B) \). 
+Определим \( C_0 = A \setminus g(B) \).
 \( A \supseteq C_{n + 1} = g(f(C_n)), n \geq 0 \)
 
 \( C = \bigcup\limits_{n \geq 0} C_n \)
 
 Возьмем
 \(
-    h = 
+    h =
     \begin{cases}
         f(x), x \in C
         \\
@@ -266,14 +266,14 @@
         \( h \) --- инъекция
 
         \( h(x_1) = h(x_2) \)
-        
+
         \begin{itemize}
             \item
                 \( x_1, x_2 \in C \Rightarrow f(x_1) = f(x_2) \Rightarrow x_1 = x_2 \)
             \item
                 \( x_1, x_2 \notin C \Rightarrow g^{-1} (x_1) = g^{-1} (x_2) \Rightarrow x_1 = x_2 \)
             \item
-                \( x_1 \in C, x_2 \notin C \Rightarrow f(x_1) = g^{-1} (x_2) \). 
+                \( x_1 \in C, x_2 \notin C \Rightarrow f(x_1) = g^{-1} (x_2) \).
                 Но тогда \( g(f(x_1)) = x_2 \).
                 \( x_1 \in C_n \Rightarrow x_2 \in C_{n + 1} \) --- противоречие.
         \end{itemize}
