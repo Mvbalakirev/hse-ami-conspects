@@ -96,7 +96,6 @@
         \forall \ol{x}, \ol{y} \in V \quad |(\ol{x}, \ol{y})| \leq \sqrt{(\ol{x}, \ol{x})} \sqrt{(\ol{y}, \ol{y})}
     \]
 \end{thrm}
-
 \begin{gather*}
     (\ol{x} - t \ol{y}, \ol{x} - t \ol{y}) \geq 0
     \\
@@ -337,7 +336,6 @@
             \forall \varepsilon > 0 \ \exists N : \forall n > N \
             |\alpha_n - \alpha| < \varepsilon, || \ol{x}_n - \ol{x} || < \varepsilon
         \)
-
         \begin{gather*}
             || \alpha_n \ol{x}_n - \alpha \ol{x} ||
             \leq
@@ -370,7 +368,6 @@
 
     Тогда \( \lim\limits_{n \to \infty} (\ol{x}_n, \ol{y}_n) = (\ol{x}, \ol{y}) \)
 \end{thrm}
-
 \begin{gather*}
     | (\ol{x}_n, \ol{y}_n) - (\ol{x}, \ol{y}) |
     \leq
@@ -388,7 +385,6 @@
 
 \( || \ol{x} || \) --- константа, а \( || \ol{y}_n || \) ограничено, так как имеет предел.
 Значит их сумма тоже ограничена некоторой константой \( C > 0 \).
-
 \begin{gather*}
     | (\ol{x}_n, \ol{y}_n) - (\ol{x}, \ol{y}) |
     \leq
@@ -600,13 +596,13 @@
     выполнено \( \lim\limits_{n \to \infty} f(a_n) = f(a) \)
 \end{defn}
 
-\begin{defn}{Непрерывность композиции}{}
+\begin{thrm}{Непрерывность композиции}{}
     Пусть \( f : (X, \rho_x) \to (Y, \rho_y) \), \( g : (Y, \rho_y) \to (Z, \rho_z) \)
 
     Также \( f \in C(a), g \in C(f(a)) \).
 
     Тогда \( (g \circ f) \in C(a) \).
-\end{defn}
+\end{thrm}
 
 \( \forall \{ a_n \} \subset X : a_n \to a \lim\limits_{n \to \infty} f(a_n) = f(a) \)
 
@@ -841,7 +837,6 @@
 \begin{prop}{}{}
     \( f \in D(\ol{a}) \Rightarrow f \in C(\ol{a}) \)
 \end{prop}
-
 \begin{gather*}
     ||f( \ol{a} + \ol{h} ) - f(\ol{a})||
     =
@@ -922,7 +917,6 @@
         f \in D(\ol{a}) \Rightarrow \lim\limits_{t \to 0} \frac{f(\ol{a} + t \ol{v}) - f(\ol{a})}{t} = df(\ol{a})(\ol{v})
     \]
 \end{thrm}
-
 \begin{gather*}
     f(\ol{a} + t \ol{v}) - f(\ol{a}) = df(\ol{a}) (t \ol{v}) + \alpha(t \ol{v}) \cdot || t \ol{v} ||
     \\
@@ -1166,7 +1160,6 @@
 
     Тогда \( g \circ f \in D(a) \), причем \( d (g \circ f) (\ol{a}) = dg(f(\ol{a})) \circ df (\ol{a}) \)
 \end{thrm}
-
 \begin{gather*}
     f(\ol{a} + \ol{h}) - f(\ol{a}) = df(\ol{a}) \ol{h} + || \ol{h} || \cdot \alpha (\ol{h})
     \\
@@ -1215,7 +1208,6 @@
 \]
 
 Значит это слагаемое стремится к нулю при \( \ol{h} \to \ol{0} \).
-
 \begin{gather*}
     \frac{|| df(\ol{a}) \ol{h} + || \ol{h} || \cdot \alpha(h) ||}{|| \ol{h} ||} \cdot || \beta (f(\ol{a} + \ol{h}) - f(\ol{a})) ||
     \leq
@@ -1248,7 +1240,6 @@
     вместо независимых переменных \( y_k \) подставить функции \( f_k(\ol{x}) \),
     то при \( \ol{x} = \ol{a} \) полученное выражение является \( d(g \circ f)(\ol{a}) \).
 \end{thrm}
-
 \begin{gather*}
     d(g \circ f)(\ol{a})
     =
@@ -1323,7 +1314,6 @@
     \), где \( \alpha_j \) --- угол между \( \ol{v} \) и осью \( y_j \).
 
     В таком случае \( || \ol{v} || = 1 \).
-
     \begin{gather*}
         g(\ol{b} + t \ol{v}) = g(b_1 + t v_1, \ldots, b_d + t v_m) = u(t)
         \\
@@ -1334,9 +1324,7 @@
             \\
             b_d + t \cos \alpha_m
         \end{pmatrix}
-    \end{gather*}
-
-    \begin{gather*}
+        \\
         \frac{\partial g}{\partial \ol{v}} ( \ol{b} )
         =
         u' (0)
@@ -1527,8 +1515,7 @@
 
 \( h'(t) = F_1' \cdot (x - c) + F_2' \cdot (y - y_c) \).
 
-По теореме Ролля \( \exists \xi \in (0, 1) : h'(\xi) = 0 \)
-
+По теореме Ролля \( \exists \xi \in (0, 1) : h'(\xi) = 0 \), то есть:
 \begin{gather*}
     0 = F_1' \cdot (x - c) + F_2' (y - y_c)
     \\
