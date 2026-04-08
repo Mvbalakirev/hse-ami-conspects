@@ -30,6 +30,7 @@
 \usepackage{graphics}
 \usepackage{pgfplots}
 \usepackage{tikz}
+\usetikzlibrary{positioning}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Other Settings
@@ -94,6 +95,7 @@
 \definecolor{myblue}{HTML}{c8e1f2}
 \definecolor{mypurple}{HTML}{b19cd9}
 \definecolor{mygray}{HTML}{cccccc}
+\definecolor{myteal}{HTML}{48d1cc}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -213,6 +215,13 @@
      colframe=mygray!60
     }
     {remark}
+\newtcbtheorem[use counter from=defn]
+    {obs}{Наблюдение}
+    {myboxstyle,
+     colback=myteal!10,
+     colframe=myteal!60
+    }
+    {obs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Math Operators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

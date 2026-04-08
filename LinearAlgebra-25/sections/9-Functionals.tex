@@ -1,0 +1,131 @@
+\section{Функционалы}
+
+\begin{defn}{}{}
+    \( V \) --- векторное пространство над \( F \)
+
+    \( V^* = \{ \xi : V \to F \: | \: \text{\( \xi \) --- линейное} \} = \hom_F (V, F) \) --- двойственное пространство
+
+    \( V^* \) --- тоже векторное пространство
+
+    \( \xi : V \to F \), \( \eta : V \to F \), \( \lambda \in F \)
+    \begin{itemize}
+        \item
+            \( (\xi + \eta) (v) = \xi(v) + \eta(v) \)
+        \item
+            \( (\lambda \cdot \xi) (v) = \lambda \cdot \xi (v) \)
+    \end{itemize}
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( (\RR^n)^* \) --- пространство строк
+        \item
+            \( \RR[x] \to \RR \), \( \lambda \in \RR \)
+
+            \( f \mapsto f(\lambda) \)
+        \item
+            \( C[a, b] \to \RR \)
+
+            \( f \mapsto \int\limits_{a}^{b} f(x) dx \)
+        \item
+            \( M_n (\RR) \to \RR \)
+
+            \( A \mapsto \tr (A) \)
+    \end{enumerate}
+\end{example}
+
+\begin{lemma}{}{}
+    \( V \) --- векторное пространство над \( F \)
+
+    \( e_1, \ldots, e_n \) --- базис \( V \)
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            \( \exists! \xi_1, \ldots, \xi_n \in V* \)
+
+            \(
+                \xi_i (e_j) = \begin{cases}
+                    1 \quad i = j 
+                    \\
+                    0 \quad i \neq j
+                \end{cases}
+            \)
+        \item
+            \( \xi_1, \ldots, \xi_n \) --- базис
+        \item
+            \( \xi \in V^* \ \xi = \xi (e_1) \xi_1 + \ldots + \xi (e_n) \xi_n \)
+
+            \( v \in V \)
+
+            \( v = \xi_1 (v) e_1 + \ldots + \xi_n(v) e_n \)
+    \end{enumerate}
+\end{lemma}
+
+\begin{defn}{}{}
+    \( (\xi_1, \ldots, \xi_n) \) --- двойственный базис к \( (e_1, \ldots, e_n) \).
+\end{defn}
+
+\begin{enumerate}
+    \item
+        Мы знаем, что базисный набор можно отправить куда угодно,
+        причем будет существовать единственное линейное отображение с таким свойством.
+        Отсюда сразу вытекает существование и единственность \( \xi_i \)
+    \item
+        Проверим, что наш набор является ЛНЗ порождающим.
+
+        \begin{itemize}
+            \item
+                ЛНЗ:
+
+                \( \lambda_1 \xi_1 + \ldots + \lambda_n \xi_n = 0 \) (в \( V^* \))
+
+                \( \forall v \in V \):
+
+                \( (\lambda_1 \xi_1 + \ldots + \lambda_n \xi_n)(v) = 0(v) \) (в \( F \))
+
+                Преобразуем обе части:
+
+                \( \lambda_1 \xi_1 (v) + \ldots + \lambda_n \xi_n(v) = 0 \)
+
+                Подставим \( e_i \), получим:
+
+                \( \lambda_i \cdot 1 = 0 \Rightarrow \lambda_i = 0 \)
+            \item
+                Порождающий:
+
+                Возьмем \( \xi \in V^* \)
+
+                Покажем, что \( \xi = \xi (e_1) \cdot \xi_1 + \ldots + \xi (e_n) \cdot \xi_n \) (в \( V^* \))
+
+                \( \xi(v) = (\xi (e_1) \cdot \xi_1 + \ldots + \xi (e_n) \cdot \xi_n)(v) \)
+
+                \( \xi(v) = \xi (e_1) \cdot \xi_1 (v) + \ldots + \xi (e_n) \cdot \xi_n (v) \)
+
+                Поскольку у нас линейные функции, достаточно проверить только на базисных векторах:
+
+                \( \xi(e_i) = \xi (e_1) \cdot \xi_1 (e_i) + \ldots + \xi (e_n) \cdot \xi_n (e_i) \)
+
+                \( \xi(e_i) = \xi (e_i) \cdot 1 \) --- ура, сошлось
+        \end{itemize}
+    \item
+        Проверим в лоб:
+
+        \( v = \lambda_1 e_1 + \ldots + \lambda_n e_n \)
+
+        \( \xi_i (v) = \xi_i(\lambda_1 e_1 + \ldots + \lambda_n e_n) \)
+
+        \( \xi_i (v) = \lambda_1 \xi_i (e_1) + \ldots + \lambda_n \xi_ i(e_n) \)
+
+        \( \xi_i (v) = \lambda_i \cdot 1 \) --- ура, доказали, что \( \xi_i (v) = \lambda_i \)
+\end{enumerate}
+
+\begin{coroll}{}{}
+    Если \( \dim V = n < \infty \),
+    то \( \dim V^* = n < \infty \).
+
+    Если же \( \dim V = \infty \),
+    то если вы верите в аксиому выбора, то \( \dim V^* > \dim V \),
+    а если не верите, то данный результат нельзя ни доказать, ни опровергнуть.
+\end{coroll}

@@ -159,20 +159,19 @@
     \end{itemize}
 \end{defn}
 
-\begin{defn}{}{}
+\begin{defn}{Линейная оболочка}{}
     \begin{itemize}
         \item
             \( v_1, v_2, \ldots, v_k \in V \)
 
-            Линейная оболочка \( < v_1, \ldots, v_k > \)
+            \( \langle v_1, \ldots, v_k \rangle \) --- множество всех линейных комбинаций \( v_1, \ldots, v_k \)
         \item
-            \( E \subseteq V \)
+            \( E \subseteq V \) --- любое
 
-            Линейная оболочка
             \(
-                <E> = \{ \alpha_1 v_1 + \ldots + \alpha_k v_k
+                \langle E \rangle = \{ \alpha_1 v_1 + \ldots + \alpha_k v_k
                 \ \vline \
-                \forall v_1, \ldots, v_k \in E, \ \alpha_1, \ldots, \alpha_k \in F
+                \forall v_1, \ldots, v_k \in E, \ \alpha_1, \ldots, \alpha_k \in F \}
             \)
     \end{itemize}
 \end{defn}
@@ -182,9 +181,7 @@
 \end{remark}
 
 \begin{thrm}{}{}
-    \( V \) --- векторное пространство над \( F \)
-
-    \( E \subseteq V \)
+    \( V \) --- векторное пространство над \( F \), \( E \subseteq V \)
 
     Тогда эквивалентны следующие утверждения:
     \begin{enumerate}
@@ -390,9 +387,9 @@
 
 Пусть \( \dim U = \dim V = n \).
 Теперь рассмотрим \( e_1, \ldots, e_n \) --- базис \( U \).
-Тогда \( U = < e_1, \ldots, e_n > \).
+Тогда \( U = \langle e_1, \ldots, e_n \rangle \).
 Но с другой стороны \( E \) --- максимальное ЛНЗ в \( V \), поэтому \( E \) является и базисом \( V \).
-Но тогда \( V = < e_1, \ldots, e_n > = U \).
+Но тогда \( V = \langle e_1, \ldots, e_n \rangle = U \).
 
 \newpage
 
@@ -620,8 +617,6 @@
 Очевидно, что в силу построения такого решения мы можем получить решение с любым набором свободных коэффициентов.
 А если у решений совпадают все свободные, то и все главные тоже равны.
 
-\newpage
-
 \subsection{Ранг матрицы}
 
 \begin{defn}{Столбцовый ранг}{}
@@ -630,7 +625,7 @@
             A_1 & \ldots & A_n
         \end{pmatrix}
         \\
-        rk_\text{столб} \: A = \dim < A_1, \ldots, A_n >
+        \rk_\text{столб} A = \dim \langle A_1, \ldots, A_n \rangle
     \end{gather*}
 \end{defn}
 
@@ -644,7 +639,7 @@
             A_n
         \end{pmatrix}
         \\
-        rk_\text{строч} \: A = \dim < A_1, \ldots, A_n >
+        \rk_\text{строч} A = \dim \langle A_1, \ldots, A_n \rangle
     \end{gather*}
 \end{defn}
 
@@ -652,30 +647,28 @@
     Пусть \( A \) --- матрица \( m \times n \).
 
     Рассмотрим все возможные разбиения \( A \) на множители размерами \( m \times k \), \( k \times n \).
-    Среди всех таких выберем наименьшее \( k \) --- это \( rk_\text{Ф} \).
+    Среди всех таких выберем наименьшее \( k \) --- это \( \rk_\text{Ф} \).
 
-    Для нулевой матрицы: \( rk_\text{Ф} \: 0 = 0 \)
+    Для нулевой матрицы: \( \rk_\text{Ф} 0 = 0 \)
 \end{defn}
 
 \begin{defn}{Тензорный ранг}{}
     Пусть \( A \) --- матрица \( m \times n \).
 
-    \( rk_T A \: = \{ k \ \vline \ A = x_1 y_1 + \ldots + x_n y_n, \: x_i \in F^m, y_i^T \in F^n \} \)
+    \( \rk_T A = \min \{ k \ \vline \ A = x_1 y_1 + \ldots + x_k y_k, \: x_i \in F^m, y_i^T \in F^n \} \)
 
-    Для нулевой матрицы: \( rk_T \: 0 = 0 \)
+    Для нулевой матрицы: \( \rk_T 0 = 0 \)
 \end{defn}
 
 \begin{defn}{Минорный ранг}{}
     Квадратная подматрица --- элементы на пересечении \( k \) столбцов и \( k \) строк.
 
-    \( rk_M \: A = \) размер максимальной (именно максимальной, а не наибольшей) невырожденной квадратной подматрицы.
+    \( \rk_M A = \) размер максимальной (именно максимальной, а не наибольшей) невырожденной квадратной подматрицы.
 \end{defn}
 
 \begin{remark}{}{}
-    В силу блочного умножения \( rk_\text{Ф} = rk_T \).
+    В силу блочного умножения \( \rk_\text{Ф} = \rk_T \).
 \end{remark}
-
-\newpage
 
 \begin{lemma}{}{}
     \( A \in M_{mn} (F) \)
@@ -684,10 +677,10 @@
 
     \( D \in M_n(F) \) --- невырожденная
 
-    Покажем, что \( rk_* \: A = rk_* \: (CAD) \) для \( * = \) столб, строк, Ф, Т
+    Покажем, что \( \rk_* A = \rk_* (CAD) \) для \( * = \) столб, строк, Ф, Т
 \end{lemma}
 
-Поскольку \( rk_\text{столб} \: A = rk_\text{строч} \: A^T \), можем доказывать только для столбцового.
+Поскольку \( \rk_\text{столб} A = \rk_\text{строч} A^T \), можем доказывать только для столбцового.
 \begin{itemize}
     \item
         \( A \mapsto CA = B \)
@@ -705,7 +698,7 @@
         Столбцы --- координаты в базисе, умножение на \( C \) --- смена координат.
 
         Поэтому
-        \( \dim < A_1, \ldots, A_n > = \dim < B_1, \ldots, B_n > \)
+        \( \dim \langle A_1, \ldots, A_n \rangle = \dim \langle B_1, \ldots, B_n \rangle \)
     \item
         \( A \mapsto AD = B \)
 
@@ -721,7 +714,7 @@
 
         Заметим, что \( B_i \) --- линейная комбинация \( A_1, \ldots, A_n \).
 
-        Поэтому \( < B_1, \ldots, B_n > \subseteq < A_1, \ldots, A_n > \).
+        Поэтому \( \langle B_1, \ldots, B_n \rangle \subseteq \langle A_1, \ldots, A_n \rangle \).
 
         С другой стороны \( A = D^{-1} B \Rightarrow \) включение верно в другую сторону,
         а значит линейные оболочки равны, откуда и следует нужное.
@@ -731,15 +724,16 @@
 
 Пусть \( A = B_1 \cdot B_2 \) и на этом достигается ранг.
 
-Но тогда \( B = CAD = (C B_1) \cdot (B_2 D) \), а значит \( rk_\text{Ф} \: A \geq rk_\text{Ф} \: B \).
+Но тогда \( B = CAD = (C B_1) \cdot (B_2 D) \), а значит \( \rk_\text{Ф} A \geq \rk_\text{Ф} B \).
 
 Но \( A = C^{-1} B D^{-1} \), а значит равенство верно и в другую сторону.
-Значит \( rk_\text{Ф} \: A = rk_\text{Ф} \: CAD \)
+
+Значит \( \rk_\text{Ф} A = \rk_\text{Ф} CAD \)
 
 \begin{lemma}{}{}
     \( A \in M_{mn} (F) \)
 
-    Тогда \( rk_\text{столб} \: A = rk_\text{строк} \: A = rk_\text{Ф} \: A = rk_T \: A \)
+    Тогда \( \rk_\text{столб} A = \rk_\text{строк} A = \rk_\text{Ф} A = \rk_T A \)
 \end{lemma}
 
 Давайте элементарными преобразованиями приведем \( A \) к виду
@@ -754,7 +748,7 @@
 В силу предыдущей леммы можно доказывать равенство рангов на этой матрице.
 Пусть размеры \( E \) --- \( r \times r \).
 
-Очевидно, что \( rk_\text{столб} \: A = rk_\text{строч} \: A = r \)
+Очевидно, что \( \rk_\text{столб} A = \rk_\text{строч} A = r \)
 
 \(
     \begin{pmatrix}
@@ -775,9 +769,9 @@
 
 Причем размеры множителей \( n \times r \) и \( r \times m \)
 
-Значит \( rk_\text{Ф} \leq rk_\text{столб} \)
+Значит \( \rk_\text{Ф} \leq \rk_\text{столб} \)
 
-Теперь покажем, что \( rk_\text{Ф} \geq rk_\text{столб} \).
+Теперь покажем, что \( \rk_\text{Ф} \geq \rk_\text{столб} \).
 
 
 Рассмотрим разбиения на множители, где достигается факториальный ранг
@@ -798,17 +792,17 @@
     C
 \)
 
-\( A_i \) --- линейная комбинация \( B_1, \ldots, B_k \)
-\( \Rightarrow \) \( < A_1, \ldots, A_n > \subseteq < B_1, \ldots, B_k > \).
+\( A_i \) --- линейная комбинация \( B_1, \ldots, B_k \) 
+\( \Rightarrow \langle A_1, \ldots, A_n \rangle \subseteq \langle B_1, \ldots, B_k \rangle \).
 
-Но тогда \( rk_\text{столб} \dim < A_1, \ldots, A_n > \leq k = rk_\text{Ф} \).
+Но тогда \( \rk_\text{столб} \dim \langle A_1, \ldots, A_n \rangle \leq k = \rk_\text{Ф} \).
 
-Выше показали, что неравенство верно и в другую сторону, поэтому \( rk_\text{Ф} = rk_\text{столб} \)
+Выше показали, что неравенство верно и в другую сторону \( \Rightarrow \rk_\text{Ф} = \rk_\text{столб} \)
 
 \begin{lemma}{}{}
     Пусть \( B \) максимальная по включению невырожденная квадратная подматрица размера \( r \).
 
-    Тогда \( r = rk_\text{столб} \: A = rk_\text{строч} \: A = rk_\text{Ф} \: A = rk_T \: A \)
+    Тогда \( r = \rk_\text{столб} A = \rk_\text{строч} A = \rk_\text{Ф} A = \rk_T A \)
 \end{lemma}
 
 Для начала приведем приведем матрицу \( A \) к виду
@@ -922,10 +916,10 @@
     \end{itemize}
 \end{example}
 
-\( \hom_F (v, u) = \{ \varphi \ \vline \ \varphi - \text{\( F \)-линейно} \} \)
+\( \hom_F (V, U) = \{ \varphi \ \vline \ \varphi : V \to U - \text{\( F \)-линейно} \} \)
 
 \begin{remark}{}{}
-    \( (\hom_F (v, u), +, \cdot) \) --- векторное пространство.
+    \( (\hom_F (V, U), +, \cdot) \) --- векторное пространство.
 \end{remark}
 
 Очевидно, что для задания линейного отображения нужно задать его на базисных векторах,
@@ -939,7 +933,7 @@
 Идея:
 
 \(
-    \Phi_\text{коорд} F^n \to F^m
+    \Phi_\text{коорд} : F^n \to F^m
 \)
 
 \(
@@ -1051,13 +1045,13 @@
 \end{defn}
 
 \begin{defn}{Образ}{}
-    \( Im \: \Phi = \{ \Phi(v) \in U \ \vline \ v \in V \} = \Phi(V) \)
+    \( \Img \Phi = \{ \Phi(v) \in U \ \vline \ v \in V \} = \Phi(V) \)
 \end{defn}
 
 \begin{remark}{}{}
     \( \ker \Phi \subseteq V \) --- подпространство
 
-    \( Im \: \Phi \subseteq U \) --- подпространство
+    \( \Img \Phi \subseteq U \) --- подпространство
 \end{remark}
 
 \begin{example}{}{}
@@ -1070,16 +1064,16 @@
     \( \ker \Phi = \{ x \in F^n \ \vline \ Ax = 0 \} \)
 
     \(
-        Im \: \Phi = \{ Ax \in F^m \ \vline \ x_i \in F \} = < A_1, \ldots, A_n >
+        \Img \Phi = \{ Ax \in F^m \ \vline \ x_i \in F \} = \langle A_1, \ldots, A_n \rangle
     \)
 
     (\( A_i \) --- столбцы \( A \))
 \end{example}
 
 \begin{remark}{}{}
-    \( \dim Im \: \Phi = rk \: A \)
+    \( \dim \Img \Phi = \rk A \)
 
-    \( \dim \ker \Phi = n - rk \: A \)
+    \( \dim \ker \Phi = n - \rk A \)
 \end{remark}
 
 \begin{lemma}{}{}
@@ -1090,9 +1084,9 @@
         \item
             \( \Phi \) инъективно \( \Leftrightarrow \) \( \ker \Phi = 0 \)
         \item
-            \( \Phi \) сюръективно \( \Leftrightarrow \) \( Im \: \Phi = U \)
+            \( \Phi \) сюръективно \( \Leftrightarrow \) \( \Img \Phi = U \)
         \item
-            \( \dim \ker \Phi + \dim Im \: \Phi = \dim V \ \)
+            \( \dim \ker \Phi + \dim \Img \Phi = \dim V \ \)
     \end{enumerate}
 \end{lemma}
 
@@ -1120,6 +1114,8 @@
         \)
 \end{itemize}
 
+\newpage
+
 \subsection{Неравенства на ранги}
 
 \subsubsection{Сумма}
@@ -1127,41 +1123,41 @@
 \begin{lemma}{}{}
     \( A, B \in M_{mn} (F) \)
 
-    Тогда \( | rk \: A - rk \: B | \leq rk \: (A + B) \leq rk \: A + rk \: B \)
+    Тогда \( | \rk A - rk \: B | \leq \rk (A + B) \leq \rk A + \rk B \)
 \end{lemma}
 
-Пусть \( rk \: A = r, rk \: B = d \).
+Пусть \( \rk A = r, \rk B = d \).
 
 Заметим, что из тензорного ранга сразу следует, что \( A + B \) можно
 представить в нужной форме из \( r + d \) слагаемых,
-поэтому \( rk \: (A + B) \leq r + d = rk \: A + rk \: B \)
+поэтому \( \rk (A + B) \leq r + d = \rk A + \rk B \)
 
 Для другого неравенства воспользуемся трюком:
 \begin{gather*}
-    rk \: ((A + B) - (-B)) \leq rk \: (A + B) + rk \: (-B)
+    \rk ((A + B) - (-B)) \leq \rk (A + B) + \rk (-B)
     \\
-    rk \: A \leq rk \: (A + B) + rk \: B
+    \rk A \leq \rk (A + B) + \rk B
     \\
-    rk \: A - rk \: B \leq rk \: (A + B)
+    \rk A - \rk B \leq \rk (A + B)
 \end{gather*}
 
-Сделав такое же неравенство на \( rk \: B - rk \: A \) получим желаемое.
+Сделав такое же неравенство на \( \rk B - \rk A \) получим желаемое.
 
 \subsubsection{Произведение}
 
 \begin{lemma}{}{}
     \( A \in M_{mk} (F) \), \( B \in M_{kn} (F) \)
 
-    Тогда \( rk \: A + rk \: B - k \leq rk \: (AB) \leq \min (rk \: A, rk \: B) \)
+    Тогда \( \rk A + \rk B - k \leq \rk (AB) \leq \min (\rk A, \rk B) \)
 \end{lemma}
 
-\( rk \: A = r \)
+\( \rk A = r \)
 
 Тогда \( A = A_1 \cdot A_2 \) и \( A_1 \in M_{mr} (F) \)
 
-Значит \( AB = A_1 \cdot (A_2 B) \Rightarrow rk \: AB \leq r = rk \: A \).
+Значит \( AB = A_1 \cdot (A_2 B) \Rightarrow \rk AB \leq r = \rk A \).
 
-Аналогично можно получить неравенство с \( rk \: B \)
+Аналогично можно получить неравенство с \( \rk B \)
 
 Для оценки снизу рассмотрим линейные отображения:
 \begin{enumerate}
@@ -1179,52 +1175,52 @@
         \( x \mapsto ABx \)
 \end{enumerate}
 
-\( Im \: A \) = <столбцы \( A \)>
+\( \Img A \) = <столбцы \( A \)>
 
 \( \ker A = \{ x \in F^k \ \vline \ x \in F^k \} \)
 
-\( Im \: A = \{ Ax \in F^m \ \vline \ x \in F^k \} \)
+\( \Img A = \{ Ax \in F^m \ \vline \ x \in F^k \} \)
 
-Поэтому \( rk \: A = \dim Im \: A \)
+Поэтому \( \rk A = \dim \Img A \)
 
 Хотим доказать:
 \[
-    \dim Im \: A + \dim Im \: B - k \leq \dim Im \: AB
+    \dim \Img A + \dim \Img B - k \leq \dim \Img AB
 \]
 
-Рассмотрим \( A \: \vline_{\: Im \: B} \).
-Оно переводит вектор из \( Im \: B \) в \( F^m \),
+Рассмотрим \( A \: \vline_{\: \Img B} \).
+Оно переводит вектор из \( \Img B \) в \( F^m \),
 причем:
 \[
-    Im \: A \: \vline_{\: Im \: B} = Im \: AB
+    \Img A \: \vline_{\: \Img B} = \Img AB
 \]
 
 Из суммы размерностей ядра и образа:
 \[
-    \dim Im \: A \: \vline_{\: Im \: B} + \dim \ker A \: \vline_{\: Im \: B} = \dim Im \: B
+    \dim \Img A \: \vline_{\: \Img B} + \dim \ker A \: \vline_{\: \Img B} = \dim \Img B
 \]
 
 Из соображений здравого смысла:
 \begin{gather*}
-    \ker A \: \vline_{\: Im \: B} = Im \: B \cap \ker A \subseteq \ker A
+    \ker A \: \vline_{\: \Img B} = \Img B \cap \ker A \subseteq \ker A
     \\
     \Downarrow
     \\
-    \dim \ker A \: \vline_{\: Im \: B} \leq \dim \ker A
+    \dim \ker A \: \vline_{\: \Img B} \leq \dim \ker A
 \end{gather*}
 
 Тогда:
 \begin{gather*}
-    \dim Im \: A \: \vline_{\: Im \: B} + \dim \ker A \: \vline_{\: Im \: B} = \dim Im \: B
+    \dim \Img A \: \vline_{\: \Img B} + \dim \ker A \: \vline_{\: \Img B} = \dim \Img B
     \\
-    \dim Im \: AB + \dim \ker A \: \vline_{\: Im \: B} = \dim Im \: B
+    \dim \Img AB + \dim \ker A \: \vline_{\: \Img B} = \dim \Img B
     \\
-    \dim Im \: AB
-        = \dim Im \: B - \dim \ker A \: \vline_{\: Im \: B}
-        \leq \dim Im \: B - \dim \ker A
+    \dim \Img AB
+        = \dim \Img B - \dim \ker A \: \vline_{\: \Img B}
+        \leq \dim \Img B - \dim \ker A
         = \\
-        = \dim Im \: B - (k - \dim Im \: A)
-        = \dim Im \: A + \dim Im \: B - k
+        = \dim \Img B - (k - \dim \Img A)
+        = \dim \Img A + \dim \Img B - k
 \end{gather*}
 
 Что и требовалось доказать.
@@ -1249,7 +1245,7 @@
 \begin{gather*}
     \bigcap\limits_{ \alpha \in A } U_\alpha
     \\
-    \sum\limits_{ \alpha \in A } U_\alpha = \{ u_{\alpha_1} + \ldots + u_{\alpha_k} \ \vline \ \alpha_1, \ldots, \alpha_k \in A \}
+    \sum\limits_{ \alpha \in A } U_\alpha = { \{ u_{\alpha_1} + \ldots + u_{\alpha_k} \ \vline \ \alpha_1, \ldots, \alpha_k \in A \} }
 \end{gather*}
 
 \begin{lemma}{}{}
@@ -1271,10 +1267,10 @@
 \begin{gather*}
     \sum \alpha_i e_i + \sum \beta_i f_i + \sum \gamma_i g_i = 0
     \\
-    \sum \alpha_i e_i + \sum \beta_i f_i = - \sum \gamma_i g_i = z \in U \cap W
+    \sum \alpha_i e_i + \sum \beta_i f_i = - \sum \gamma_i g_i = z
 \end{gather*}
 
-Значит \( z = \sum \delta_i e_i \)
+\( z \in U, z \in W \Rightarrow z \in U \cap W \Rightarrow z = \sum \delta_i e_i \)
 \begin{gather*}
      - \sum \gamma_i g_i = \sum \delta_i e_i
      \\
@@ -1304,8 +1300,10 @@
 
 \begin{example}{}{}
     Если в \( \RR^3 \) взять базис \( e_1, e_2, e_3 \),
-    то \( <e_1, e_2> \) и \( <e_3> \) --- ЛНЗ.
+    то \( \langle e_1, e_2 \rangle \) и \( \langle e_3 \rangle \) --- ЛНЗ.
 \end{example}
+
+\newpage
 
 \begin{thrm}{}{}
     \( V \) --- векторное пространство над \( F \)
@@ -1319,7 +1317,7 @@
         \item
             \( \forall v \in U_1 + \ldots + U_k \ \exists! \: v = u_1 + \ldots + u_k \)
         \item
-            \( U_i = < e_i > \) (базис) \( \Rightarrow \)
+            \( U_i = \langle e_i \rangle \) (\( e_i \) --- базис \( U_i \)) \( \Rightarrow \)
             \( e_i \cap e_j = \varnothing \)
             и \( \bigcup e_i \) --- базис \( U_1 + \ldots + U_k \)
         \item
@@ -1358,7 +1356,23 @@
     \item
         \( (4) \Rightarrow (5) \)
 
-        % TODO
+        Хотим показать, что \( ( U_1 ) \cap (U_2 + \ldots + U_k) = 0 \)
+        \begin{gather*}
+            \dim (( U_1 ) \cap (U_2 + \ldots + U_k))
+            =
+            \\
+            =
+            \dim U_1 + \dim (U_2 + \ldots + U_k) - \dim (U_1 + \ldots + U_k)
+            \leq
+            \\
+            \leq
+            \dim U_1 + \dim U_2 + \ldots + \dim U_k - \dim (U_1 + \ldots + U_k)
+            =
+            0
+        \end{gather*}
+
+        Поэтому \( \dim (( U_1 ) \cap (U_2 + \ldots + U_k)) = 0 \),
+        то есть это нулевое пространство.
     \item
         \( (5) \Rightarrow (1) \)
 
