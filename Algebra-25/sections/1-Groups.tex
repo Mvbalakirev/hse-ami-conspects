@@ -196,3 +196,229 @@
         | \langle g \rangle | = \ord (g)
     \]
 \end{prop}
+
+Пусть \( g^n = g^m \) и \( n > m \Rightarrow g^{n - m} = e \Rightarrow \) порядок \( g \) конечен.
+
+Отсюда можно сделать вывод, что если \( \ord (g) = \infty \), то \( g^n \neq g^m \) при \( n \neq m \),
+а значит и \( | \langle g \rangle | = \infty \).
+
+Теперь пусть \( \ord (g) = m \).
+По определению \( g^m = e \) и \( g^k \neq e \) при \( 0 < k < m \).
+Поэтому \( g^0, \ldots, g^{m - 1} \) попарно различны (иначе можно применить трюк выше).
+Любое целое число можно поделить с остатком на \( m \): \( s = mq + r \), где \( 0 \leq r < m \).
+Но тогда понятно, что \( g^s = g^r \).
+А значит \( \langle g \rangle = \{ g^0, g^1, \ldots, g^{m - 1} \} \Rightarrow |G| = m \).
+
+Что и требовалось доказать.
+
+\begin{defn}{Циклическая группа}{}
+    Группа \( G \) назыается циклической, если \( \exists g \in G : G = \langle G \rangle \)
+\end{defn}
+
+\begin{remark}{}{}
+    Нетрудно убедиться, что тогда \( G \) коммутативна и не более чем счетна.
+\end{remark}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( (\ZZ, +) = \langle 1 \rangle = \langle -1 \rangle \)
+        \item
+            \( (\ZZ_n, +) = \langle \ol{1} \rangle = \langle \ol{k} \rangle \), где \( (k, n) = 1 \)
+        \item
+            \( (\CC \setminus \{ 0 \}, \times) \supset \langle \varepsilon \rangle \),
+            где \( \varepsilon \) --- первообразный корень
+    \end{itemize}
+\end{example}
+
+\begin{defn}{Левый смежный класс}{}
+    Пусть \( G \) --- группа, \( H \subseteq G \) --- подгруппа.
+
+    Левый смежный класс элемента \( g \in G \) по подгруппе \( H \) --- это подмножество,
+    которое обозначается \( gH \) и равно \( \{ gh \: \vline \: h \in H \} \).
+\end{defn}
+
+\newpage
+
+\begin{lemma}{}{}
+    Либо \( g_1 H = g_2 H \), либо \( g_1 H \cap g_2 H = \varnothing \).
+\end{lemma}
+
+Если их пересечение пусто, то условие верно, иначе есть общий элемент:
+\[
+    g_1 h_1 = g_2 h_2 \Rightarrow g_1 = g_2 h_2 h_1^{-1}
+\]
+
+\( H \) --- подгруппа, поэтому \( h_2 h_1^{-1} \in H \Rightarrow g_1 \in g_2 H \Rightarrow g_1 H \subseteq g_2 H \).
+
+Аналогично \( g_2 H \subseteq g_1 H \), откуда \( g_1 H = g_2 H \).
+
+\begin{lemma}{}{}
+    \[
+        |gH| = |H|
+    \]
+\end{lemma}
+
+\( gH = \{ gh \: \vline \: h \in H \} \),
+поэтому давайте сопоставим \( h \in H \) элемент \( gh \).
+Откуда \( |H| \geq |gH| \).
+
+Осталось показать, что никакие два элемента в \( gH \) не совпадают:
+\[
+    g h_1 = g h_2 \Rightarrow h_1 = h_2
+\]
+
+А значит \( |H| = |gH| \), что и требовалось доказать.
+
+\begin{defn}{Индекс подгруппы}{}
+    Индекс подгруппы \( H \) в группе \( G \) --- это
+    \[
+        [ G : H ] = | G / H | = \text{число левых смежных классов}
+    \]
+\end{defn}
+
+\begin{thrm}{}{}
+    Если \( G \) --- конечная группа, а \( H \) в ней подгруппа,
+    то \( |G| = |H| \cdot [G : H] \)
+\end{thrm}
+
+Явно следует из двух предыдущих лемм.
+
+\begin{coroll}{}{}
+    Если \( G \) конечно, и \( H \subseteq G \) --- подгруппа,
+    то \( |G| \vdots |H| \).
+\end{coroll}
+
+\begin{coroll}{}{}
+    Если \( G \) конечно, и \( H \subseteq G \) --- подгруппа,
+    то \( \forall g \in G \: |G| \vdots \ord(g) \).
+\end{coroll}
+
+Явно следует из \( \ord (g) = | \langle g \rangle | \)
+
+\begin{coroll}{}{}
+    \[
+        g^{|G|} = e
+    \]
+\end{coroll}
+
+Явно следует из того, что \( |G| \vdots \ord (g) \)
+
+\begin{coroll}{}{}
+    Малая теорема Ферма
+\end{coroll}
+
+\begin{coroll}{}{}
+    Если \( |G| = p \) --- простое, то \( G \) --- циклическая группа,
+    порожденная своим любым неединичным элементом.
+\end{coroll}
+
+Пусть \( g \in G \) и \( g \neq e \).
+
+Тогда \( p = |G| \vdots | \langle g \rangle | \).
+Так как \( | \langle g \rangle | \geq 2 \), \( | \langle g \rangle | = p = |G| \),
+а значит \( |G| = \langle g \rangle \).
+
+\begin{defn}{Правый смежный класс}{}
+    Пусть \( G \) --- группа, \( H \subseteq G \) --- подгруппа.
+
+    Правый смежный класс элемента \( g \in G \) по подгруппе \( H \) --- это подмножество,
+    которое обозначается \( Hg \) и равно \( \{ hg \: \vline \: h \in H \} \).
+\end{defn}
+
+\begin{remark}{}{}
+    Для них верны те же свойства, что и для левых смежных классов.
+\end{remark}
+
+\begin{defn}{Нормальная подгруппа}{}
+    Подгруппа \( H \) нормальна, если \( gH = Hg \) \( \forall g \in G \).
+\end{defn}
+
+\begin{prop}{}{}
+    Для подгруппы \( H \subseteq G \) следующие условия эквивалентны:
+    \begin{enumerate}
+        \item
+            \( H \) нормальна
+        \item
+            \( gHg^{-1} \subseteq H \ \forall g \in G \)
+        \item
+            \( gHg^{-1} = H \ \forall g \in G \)
+    \end{enumerate}
+\end{prop}
+
+\begin{itemize}
+    \item
+        \( 1 \Rightarrow 2 \)
+
+        Рассмотрим \( h \in H, g \in G \)
+
+        \( gH = Hg \Rightarrow gh = h'g \), \( h' \in h \)
+
+        Тогда \( g h g^{-1} = h' g g^{-1} = h' \in H \)
+    \item
+        \( 2 \Rightarrow 3 \)
+
+        \( g H g^{-1} \subseteq H \)
+
+        \( \forall h \in H \) имеем \( h = (g g^{-1}) h (g g^{-1}) = g (g^{-1} h g) g^{-1} \in g H g^{-1} \)
+
+        А это значит, что \( H \subseteq g H g^{-1} \Rightarrow H = g H g^{-1} \)
+    \item
+        \( 3 \Rightarrow 1 \)
+
+        \( g H g^{-1} = H \)
+
+        Домножим справа на \( g \): \( gH = Hg \)
+\end{itemize}
+
+\textbf{Цель}: определить факторгруппу, то есть ввести операцию на множестве левых смежных классов \( G / H \),
+где \( G \) --- группа, а \( H \subseteq G \) --- подгруппа.
+
+Хочется чего-нибудь интуитивного: \( (g_1 H) (g_2 H) = g_1 g_2 H \).
+
+Проверим необходимые свойства:
+\begin{enumerate}
+    \item
+        Ассоциативность: \( ( (g_1 H) (g_2 H) ) (g_3 H) = g_1 g_2 g_3 H = (g_1 H) ( (g_2 H) (g_3 H) ) \)
+    \item
+        Нейтральный элемент: \( eH = H \quad (eH) (gH) = (gH) = (gH) (eH) \)
+    \item
+        Обратный элемент: \( (gH)^{-1} = g^{-1} H \quad (g^{-1} H) (g H) = eH = (g H) (g^{-1} H) \)
+\end{enumerate}
+
+Осталось самое нетривиальное --- корректность операции.
+Надо как-то убедиться, что операция не изменяется при выборе разных представителей \( g_1, g_2 \) смежных классов:
+\begin{gather*}
+    (g_1 h_2) (g_2 h_2) H = g_1 g_2 H
+    \\
+    h_1 g_2 (h_2 H) = g_2 H
+    \\
+    g_2^{-1} h_1 g_2 H = H
+    \\
+    \Updownarrow
+    \\
+    g_2^{-1} h_1 g_2 \in H
+    \\
+    \Updownarrow
+    \\
+    \text{\( H \) нормальна}
+\end{gather*}
+
+\begin{defn}{Факторгруппа}{}
+    Факторгруппа группы \( G \) по нормальной подгруппе \( H \)
+    называется множество (левых) смежных классов \( G / H \) с операцией
+    \( (g_1 H) (g_2 H) = g_1 g_2 H \)
+\end{defn}
+
+\newpage
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( G = (\ZZ, +) \), \( H = n \ZZ \)
+
+            \( G / H = \{ s + H = s + n \ZZ = \ol{s} \} \)
+
+            \( G / H = \ZZ_n \)
+    \end{itemize}
+\end{example}
