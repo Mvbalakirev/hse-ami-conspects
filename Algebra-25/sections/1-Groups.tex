@@ -410,15 +410,287 @@
     \( (g_1 H) (g_2 H) = g_1 g_2 H \)
 \end{defn}
 
-\newpage
+\begin{example}{}{}
+    \( G = (\ZZ, +) \), \( H = n \ZZ \)
+
+    \( G / H = \{ s + H = s + n \ZZ = \ol{s} \} = \ZZ_n \)
+\end{example}
+
+\begin{defn}{Гомоморфизм}{}
+    Пусть \( G \) и \( F \) --- группы.
+    Тогда отображение \( \varphi : G \to F \) называется гомоморфизмом,
+    если \( \varphi(a \cdot b) = \varphi(a) \odot \varphi(b) \) для любых \( a, b \in G \).
+\end{defn}
+
+\begin{lemma}{}{}
+    Если \( \varphi : G \to F \) --- гомоморфизм, то:
+    \begin{enumerate}
+        \item
+            \( \varphi(e_G) = e_F \)
+        \item
+            \( \varphi(g^{-1}) = \varphi(g)^{-1} \) для любого \( g \in G \)
+    \end{enumerate}
+\end{lemma}
+
+\begin{enumerate}
+    \item
+        \(
+            \varphi(e_G) = \varphi(e_G \cdot e_G) = \varphi(e_G) \odot \varphi(e_G)
+            \Rightarrow
+            e_F = \varphi(e_G)
+        \)
+    \item
+        \( \varphi(e_G) = \varphi(g \cdot g^{-1}) = \varphi(g) \odot \varphi(g^{-1}) \)
+
+        \( e_F \varphi(g) \odot \varphi(g^{-1}) \Rightarrow \varphi(g^{-1}) = \varphi(g)^{-1} \)
+\end{enumerate}
+
+\begin{defn}{Биекция}{}
+    Гомоморфизм \( \varphi : G \to F \) называется изоморфизмом,
+    если \( \varphi \) --- биекция.
+\end{defn}
+
+\begin{exercise}{}{}
+    Существует \( \varphi^{-1} : F \to F \) --- тоже гомоморфизм.
+\end{exercise}
+
+\begin{defn}{Изоморфность групп}{}
+    Группы \( G \) и \( F \) изоморфны,
+    если существует изоморфизм \( \varphi : G \to F \).
+\end{defn}
+
+\begin{thrm}{}{}
+    \begin{enumerate}
+        \item
+            Всякая бесконечная циклическая группа изоморфна \( (\ZZ, +) \).
+        \item
+            Всякая конечная циклическая группа порядка \( n \) изоморфна \( (\ZZ_n, +) \).
+    \end{enumerate}
+\end{thrm}
+
+\begin{enumerate}
+    \item
+        \( G = \langle g \rangle \) и \( |G| = \infty \)
+
+        \( g^m \xmapsto{\varphi} m \)
+    \item
+        \( G = \langle g \rangle \) и \( |G| = n \)
+
+        \( g^m \xmapsto{\varphi} \ol{m} \pmod n \)
+\end{enumerate}
+
+\begin{example}{}{}
+    \( (\RR, +) \cong (\RR_{> 0}, \times) \)
+
+    \( x \mapsto e^x \)
+\end{example}
+
+\begin{defn}{Ядро и образ}{}
+    С каждым гомоморфизмом \( \varphi : G \to F \) связаны:
+    \begin{itemize}
+        \item
+            \( \ker \varphi = \{ a \in G \: \vline \: \varphi(a) = e_F \} \)
+        \item
+            \( \Img \varphi = \{ b \in F \: \vline \: \exists a \in G : \varphi(a) = b \} \)
+    \end{itemize}
+\end{defn}
+
+\begin{exercise}{}{}
+    \( \ker \varphi \subseteq G \) и \( \Img \varphi \subseteq F \) --- подгруппы.
+\end{exercise}
+
+\begin{lemma}{}{}
+    Гомоморфизм \( \varphi : G \to F \) инъективен \( \Leftrightarrow \ker \varphi = \{ e_G \} \)
+\end{lemma}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        Если \( e_G \neq g \in \ker G \), то \( \varphi(g) = \varphi(e_G) = e_F \) --- элементы ``склеились''.
+    \item
+        \( \Leftarrow \)
+
+        Пусть \( \varphi(g_1) = \varphi(g_2) \).
+
+        \( \varphi(g_1 g_2^{-1}) = \varphi(g_1) \odot \varphi(g_2^{-1}) = \varphi(g_1) \odot \varphi(g_2)^{-1} = e_F \).
+
+        Значит \( g_1 g_2^{-1} \in \ker \varphi \Rightarrow g_1 g_2^{-1} = e_G \Rightarrow g_1 = g_2 \).
+\end{itemize}
+
+\begin{coroll}{}{}
+    \( \varphi \) --- биективен \( \Leftrightarrow \) \( \ker \varphi = \{ e_G \} \) и \( \Img \varphi = F \).
+\end{coroll}
+
+\begin{prop}{}{}
+    \( \ker \varphi \) --- нормальная подгруппа.
+\end{prop}
+
+Проверим, что \( \forall g \in G \), \( \forall h \in \ker \varphi \) выполнено \( g h g^{-1} \in \ker \varphi \):
+\[
+    \varphi(g h g^{-1})
+    =
+    \varphi(g) \odot \varphi(h) \odot \varphi(g^{-1})
+    =
+    \varphi(g) \odot e_F \odot \varphi(g)^{-1}
+    =
+    e_F
+\]
+
+\begin{thrm}{Теорема о гомоморфизме}{}
+    Для любого гомоморфизма \( \varphi : G \to F \) верно \( \Img \varphi \cong G / \ker \varphi \).
+\end{thrm}
+
+\begin{example}{}{}
+    \( G = (\RR, +) \), \( H = (\ZZ, +) \), \( G / H \cong S^1 \).
+
+    Это можно показать через такой гомоморфизм:
+    \[
+        \begin{aligned}
+            \varphi : \RR &\to (\CC \setminus \{ 0 \}, \times)
+            \\
+            a &\to e^{2 \pi i a}
+        \end{aligned}
+    \]
+
+    Нетрудно убедиться, что \( \ker \varphi = \ZZ \), а \( \Img \varphi = S^1 \).
+\end{example}
+
+\begin{exercise}{}{}
+    \( G = (\RR^2, +) \), \( H = (\ZZ^2, +) \), \( G / H \cong T^2 \) (тор)
+\end{exercise}
+
+\begin{exercise}{}{}
+    Пусть \( G \) --- группа, \( H \subseteq G \) --- подгруппа.
+
+    Тогда \( g_1 H = g_2 H \Leftrightarrow g_1^{-1} g_2 \in H \).
+\end{exercise}
+
+Вернемся к доказательству теоремы.
+
+Построим отображение \( \Psi : G / \ker \varphi \to \Img \varphi \) --- \( \Psi( g \ker \varphi) = \varphi(g) \)
+
+\begin{itemize}
+    \item
+        Корректность
+
+        \( \varphi (gh) = \varphi(g) \varphi(h) = \varphi(g) \)
+    \item
+        Сюръективность
+
+        Есть по построению.
+    \item
+        Инъективность:
+        \begin{gather*}
+            \Psi(g_1 \ker \varphi) = \Psi(g_2 \ker \varphi)
+            \\
+            \Updownarrow
+            \\
+            \varphi(g_1) = \varphi(g_2)
+            \\
+            \Updownarrow
+            \\
+            g_1^{-1} g_2 \in \ker \varphi
+            \\
+            \Updownarrow
+            \\
+            g_1 \ker \varphi = g_2 \ker \varphi
+        \end{gather*}
+    \item
+        Операция:
+        \begin{gather*}
+            \Psi( (g_1 \ker \varphi) (g_2 \ker \varphi) )
+            =
+            \Psi(g_1 g_2 \ker \varphi)
+            =
+            \varphi(g_1 g_2)
+            =
+            \\
+            =
+            \varphi(g_1) \varphi(g_2)
+            =
+            \Psi(g_1 \ker \phi) \Psi(g_2 \ker \varphi)
+        \end{gather*}
+\end{itemize}
+
+\begin{defn}{Центр группы}{}
+    \[
+        Z(G) = \{ a \in G \: \vline \: ab = ba \ \forall b \in G \}
+    \]
+\end{defn}
 
 \begin{example}{}{}
     \begin{itemize}
         \item
-            \( G = (\ZZ, +) \), \( H = n \ZZ \)
-
-            \( G / H = \{ s + H = s + n \ZZ = \ol{s} \} \)
-
-            \( G / H = \ZZ_n \)
+            \( Z(G) = G \Leftrightarrow G \) --- абелева.
+        \item
+            \( Z(S_n) = \{ e \} \) (при \( n \geq 3 \))
     \end{itemize}
 \end{example}
+
+\begin{prop}{}{}
+    \( Z(G) \subseteq G \) --- нормальная подгруппа.
+\end{prop}
+
+Убедимся, что \( Z(G) \) --- группа.
+Хотим \( \forall a, b \in Z(G) \Rightarrow a b^{-1} \in Z(G) \):
+\[
+    (a b^{-1}) c
+    =
+    a b^{-1} (c^{-1})^{-1}
+    =
+    a (c^{-1} b)^{-1}
+    =
+    a (b c^{-1})^{-1}
+    =
+    (b c^{-1})^{-1} a
+    =
+    c b^{-1} a
+    =
+    c (a b^{-1})
+\]
+
+Проверим нормальность, то есть хотим \( \forall a \in Z(G), b \in G \Rightarrow b a b^{-1} \in Z(G) \):
+\[
+    b a b^{-1} = a b b^{-1} = a \in Z(G)
+\]
+
+\begin{defn}{Прямое произведение}{}
+    Даны группы \( G_1, \ldots, G_m \).
+
+    Строим \( G_1 \times G_2 \times \ldots \times G_m = \{ (g_1, \ldots, g_m), \: g_i \in G_i \} \).
+
+    \( (g_1, \ldots, g_m) (g_1', \ldots, g_m') = (g_1 \odot_1 g_1', \ldots, g_m \odot_m g_m') \)
+
+    \( e = (e_1, \ldots, e_m) \)
+
+    \( g^{-1} = (g_1^{-1}, \ldots, g_m^{-1}) \)
+\end{defn}
+
+\begin{remark}{}{}
+    \begin{itemize}
+        \item
+            Прямое произведение коммутативно \( \Leftrightarrow \) все \( G_i \) коммутативны.
+        \item
+            \( |G_1 \times \ldots \times G_m| = |G_1| \ldots |G_m| \)
+    \end{itemize}
+\end{remark}
+
+\begin{thrm}{Теорема о факторизации по сомножителям}{}
+    Пусть \( H_i \subseteq G_i \) --- нормальные подгруппы.
+
+    Тогда \( H_1 \times \ldots \times H_m \subseteq G_1 \times \ldots \times G_m \)
+    --- тоже нормальная подгруппа, причем
+    \[
+        (G_1 \times \ldots \times G_m) / (H_1 \times \ldots \times H_m)
+        =
+        (G_1 / H_1) \times \ldots \times (G_m / H_m)
+    \]
+\end{thrm}
+
+Нормальность явно следует из покомпонентной нормальности.
+
+Изоморфизм (нужно так же проверить \( 4 \) условия):
+\[
+    (g_1, \ldots, g_m) (H_1 \times \ldots \times H_m) \mapsto (g_1 H_1, \ldots, g_m H_m)
+\]
